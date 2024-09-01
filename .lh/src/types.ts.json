@@ -1,0 +1,38 @@
+{
+    "sourceFile": "src/types.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 5,
+            "patches": [
+                {
+                    "date": 1725103401012,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1725105597725,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,15 @@\n // src/types.ts\n \n+export interface TelegramUser {\n+  id: number;\n+  first_name: string;\n+  last_name?: string;\n+  username?: string;\n+  language_code?: string;\n+  allows_write_to_pm?: boolean;\n+}\n+\n // export interface TelegramUser {\n //   id: number;\n //   first_name: string;\n //   last_name?: string;\n@@ -9,12 +18,4 @@\n //   allows_write_to_pm?: boolean;\n //   auth_date: number;\n //   hash: string;\n // }\n-export interface TelegramUser {\n-  id: number;\n-  first_name: string;\n-  last_name?: string;\n-  username?: string;\n-  language_code?: string;\n-  allows_write_to_pm?: boolean;\n-}\n"
+                },
+                {
+                    "date": 1725106036814,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,21 +1,21 @@\n // src/types.ts\n \n+// export interface TelegramUser {\n+//   id: number;\n+//   first_name: string;\n+//   last_name?: string;\n+//   username?: string;\n+//   language_code?: string;\n+//   allows_write_to_pm?: boolean;\n+// }\n+\n export interface TelegramUser {\n   id: number;\n   first_name: string;\n   last_name?: string;\n   username?: string;\n   language_code?: string;\n   allows_write_to_pm?: boolean;\n+  auth_date: number;\n+  hash: string;\n }\n-\n-// export interface TelegramUser {\n-//   id: number;\n-//   first_name: string;\n-//   last_name?: string;\n-//   username?: string;\n-//   language_code?: string;\n-//   allows_write_to_pm?: boolean;\n-//   auth_date: number;\n-//   hash: string;\n-// }\n"
+                },
+                {
+                    "date": 1725141168213,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,7 +15,7 @@\n   last_name?: string;\n   username?: string;\n   language_code?: string;\n   allows_write_to_pm?: boolean;\n-  auth_date: number;\n-  hash: string;\n+  // auth_date: number;\n+  // hash: string;\n }\n"
+                },
+                {
+                    "date": 1725144189795,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,7 +15,7 @@\n   last_name?: string;\n   username?: string;\n   language_code?: string;\n   allows_write_to_pm?: boolean;\n-  // auth_date: number;\n-  // hash: string;\n+  auth_date: number;\n+  hash: string;\n }\n"
+                },
+                {
+                    "date": 1725166120913,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,7 +15,7 @@\n   last_name?: string;\n   username?: string;\n   language_code?: string;\n   allows_write_to_pm?: boolean;\n-  auth_date: number;\n-  hash: string;\n+  // auth_date: number;\n+  // hash: string;\n }\n"
+                }
+            ],
+            "date": 1725103401012,
+            "name": "Commit-0",
+            "content": "// src/types.ts\n\n// export interface TelegramUser {\n//   id: number;\n//   first_name: string;\n//   last_name?: string;\n//   username?: string;\n//   language_code?: string;\n//   allows_write_to_pm?: boolean;\n//   auth_date: number;\n//   hash: string;\n// }\nexport interface TelegramUser {\n  id: number;\n  first_name: string;\n  last_name?: string;\n  username?: string;\n  language_code?: string;\n  allows_write_to_pm?: boolean;\n}\n"
+        }
+    ]
+}

@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/models/Item.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1724760093422,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1724760093422,
+            "name": "Commit-0",
+            "content": "import mongoose from \"mongoose\";\n\nconst ItemSchema = new mongoose.Schema({\n  name: { type: String, required: true },\n  category: { type: String, required: true },\n  type: { type: String, enum: [\"place\", \"person\"], required: true },\n  // Place-specific fields\n  googlePlaceId: { type: String, sparse: true, unique: true },\n  location: String,\n  distance: Number,\n  googleUrl: String,\n  rating: Number,\n  // Person-specific fields\n  description: String,\n  contactInfo: String,\n  // Common fields\n  votes: { type: Number, default: 0 },\n  lastFetched: { type: Date, default: Date.now },\n  addedBy: { type: String, required: true }, // userId of the user who added this item\n});\n\nexport default mongoose.models.Item || mongoose.model(\"Item\", ItemSchema);\n"
+        }
+    ]
+}

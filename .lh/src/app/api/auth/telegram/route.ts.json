@@ -1,0 +1,202 @@
+{
+    "sourceFile": "src/app/api/auth/telegram/route.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 46,
+            "patches": [
+                {
+                    "date": 1724756542643,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1724756849663,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import { NextRequest, NextResponse } from \"next/server\";\n-import { verifyTelegramAuth } from \"@/lib/auth\";\n+import verifyTelegramAuth from \"@/lib/auth\";\n \n export async function POST(request: NextRequest) {\n   const userData: TelegramAuthData = await request.json();\n \n"
+                },
+                {
+                    "date": 1724757380143,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import { NextRequest, NextResponse } from \"next/server\";\n-import verifyTelegramAuth from \"@/lib/auth\";\n+import verifyTelegramAuth from \"../../../lib/auth\";\n \n export async function POST(request: NextRequest) {\n   const userData: TelegramAuthData = await request.json();\n \n"
+                },
+                {
+                    "date": 1724757445965,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import { NextRequest, NextResponse } from \"next/server\";\n-import verifyTelegramAuth from \"../../../lib/auth\";\n+import { verifyTelegramAuth } from \"@/lib/auth\";\n \n export async function POST(request: NextRequest) {\n   const userData: TelegramAuthData = await request.json();\n \n"
+                },
+                {
+                    "date": 1724757466692,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n import { NextRequest, NextResponse } from \"next/server\";\n import { verifyTelegramAuth } from \"@/lib/auth\";\n+import { TelegramAuthData } from \"@/app/login/page\";\n \n export async function POST(request: NextRequest) {\n   const userData: TelegramAuthData = await request.json();\n \n"
+                },
+                {
+                    "date": 1724757482346,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import { NextRequest, NextResponse } from \"next/server\";\n-import { verifyTelegramAuth } from \"@/lib/auth\";\n+import verifyTelegramAuth from \"../../lib/auth\";\n import { TelegramAuthData } from \"@/app/login/page\";\n \n export async function POST(request: NextRequest) {\n   const userData: TelegramAuthData = await request.json();\n"
+                },
+                {
+                    "date": 1724757489927,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import { NextRequest, NextResponse } from \"next/server\";\n-import verifyTelegramAuth from \"../../lib/auth\";\n+import { verifyTelegramAuth } from \"../../../lib/auth\";\n import { TelegramAuthData } from \"@/app/login/page\";\n \n export async function POST(request: NextRequest) {\n   const userData: TelegramAuthData = await request.json();\n"
+                },
+                {
+                    "date": 1724760234405,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,7 +24,6 @@\n   }\n }\n \n function generateToken(userData: TelegramAuthData): string {\n-  // Implement your token generation logic here\n-  return \"your-generated-token\";\n+  return jwt.sign({ userId }, JWT_SECRET, { expiresIn: \"1d\" });\n }\n"
+                },
+                {
+                    "date": 1724760261458,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,6 +24,7 @@\n   }\n }\n \n function generateToken(userData: TelegramAuthData): string {\n-  return jwt.sign({ userId }, JWT_SECRET, { expiresIn: \"1d\" });\n+  // Implement your token generation logic here\n+  return \"your-generated-token\";\n }\n"
+                },
+                {
+                    "date": 1724760442560,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,15 +1,15 @@\n import { NextRequest, NextResponse } from \"next/server\";\n-import { verifyTelegramAuth } from \"../../../lib/auth\";\n-import { TelegramAuthData } from \"@/app/login/page\";\n+import { verifyTelegramAuth } from \"@/lib/auth\";\n+import { generateToken } from \"@/lib/auth\";\n \n export async function POST(request: NextRequest) {\n-  const userData: TelegramAuthData = await request.json();\n+  const userData = await request.json();\n \n   try {\n     const isValid = verifyTelegramAuth(userData);\n     if (isValid) {\n-      const token = generateToken(userData);\n+      const token = generateToken(userData.id.toString());\n       return NextResponse.json({ token });\n     } else {\n       return NextResponse.json(\n         { error: \"Invalid authentication\" },\n@@ -22,9 +22,4 @@\n       { status: 500 }\n     );\n   }\n }\n-\n-function generateToken(userData: TelegramAuthData): string {\n-  // Implement your token generation logic here\n-  return \"your-generated-token\";\n-}\n"
+                },
+                {
+                    "date": 1724760449290,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import { NextRequest, NextResponse } from \"next/server\";\n-import { verifyTelegramAuth } from \"@/lib/auth\";\n+import verifyTelegramAuth from \"@/lib/auth\";\n import { generateToken } from \"@/lib/auth\";\n \n export async function POST(request: NextRequest) {\n   const userData = await request.json();\n"
+                },
+                {
+                    "date": 1724760500598,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import { NextRequest, NextResponse } from \"next/server\";\n-import verifyTelegramAuth from \"@/lib/auth\";\n+import { verifyTelegramAuth } from \"../../../lib/auth\";\n import { generateToken } from \"@/lib/auth\";\n \n export async function POST(request: NextRequest) {\n   const userData = await request.json();\n"
+                },
+                {
+                    "date": 1724760513908,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import { NextRequest, NextResponse } from \"next/server\";\n import { verifyTelegramAuth } from \"../../../lib/auth\";\n-import { generateToken } from \"@/lib/auth\";\n+import { generateToken } from \"../../../lib/auth\";\n \n export async function POST(request: NextRequest) {\n   const userData = await request.json();\n \n"
+                },
+                {
+                    "date": 1724760520572,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import { NextRequest, NextResponse } from \"next/server\";\n import { verifyTelegramAuth } from \"../../../lib/auth\";\n-import { generateToken } from \"../../../lib/auth\";\n+import generateToken from \"../../../lib/auth\";\n \n export async function POST(request: NextRequest) {\n   const userData = await request.json();\n \n"
+                },
+                {
+                    "date": 1724760532532,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n import { NextRequest, NextResponse } from \"next/server\";\n import { verifyTelegramAuth } from \"../../../lib/auth\";\n-import generateToken from \"../../../lib/auth\";\n+import { generateToken } from \"../auth\";\n+// import generateToken from \"../../../lib/auth\";\n \n export async function POST(request: NextRequest) {\n   const userData = await request.json();\n \n"
+                },
+                {
+                    "date": 1724844055604,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n+import { verifyTelegramAuth } from \"@/app/lib/auth\";\n import { NextRequest, NextResponse } from \"next/server\";\n-import { verifyTelegramAuth } from \"../../../lib/auth\";\n import { generateToken } from \"../auth\";\n-// import generateToken from \"../../../lib/auth\";\n+// import { verifyTelegramAuth } from \"@/lib/auth\";\n+// import { generateToken } from \"@/lib/auth\"; // Make sure this function exists in your auth.ts file\n \n export async function POST(request: NextRequest) {\n   const userData = await request.json();\n \n@@ -17,8 +18,9 @@\n         { status: 401 }\n       );\n     }\n   } catch (error) {\n+    console.error(\"Authentication error:\", error);\n     return NextResponse.json(\n       { error: \"Authentication failed\" },\n       { status: 500 }\n     );\n"
+                },
+                {
+                    "date": 1724927173371,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n-import { verifyTelegramAuth } from \"@/app/lib/auth\";\n+// import { verifyTelegramAuth } from \"@/app/lib/auth\";\n import { NextRequest, NextResponse } from \"next/server\";\n import { generateToken } from \"../auth\";\n+import { verifyTelegramAuth } from \"@/app/lib/auth\";\n // import { verifyTelegramAuth } from \"@/lib/auth\";\n // import { generateToken } from \"@/lib/auth\"; // Make sure this function exists in your auth.ts file\n \n export async function POST(request: NextRequest) {\n"
+                },
+                {
+                    "date": 1724927192775,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,7 @@\n-// import { verifyTelegramAuth } from \"@/app/lib/auth\";\n import { NextRequest, NextResponse } from \"next/server\";\n-import { generateToken } from \"../auth\";\n-import { verifyTelegramAuth } from \"@/app/lib/auth\";\n-// import { verifyTelegramAuth } from \"@/lib/auth\";\n-// import { generateToken } from \"@/lib/auth\"; // Make sure this function exists in your auth.ts file\n+import { generateToken } from \"@/lib/auth\";\n+import { verifyTelegramAuth } from \"@/lib/auth\";\n \n export async function POST(request: NextRequest) {\n   const userData = await request.json();\n \n"
+                },
+                {
+                    "date": 1724927220904,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n+import { generateToken, verifyTelegramAuth } from \"@/app/lib/auth\";\n import { NextRequest, NextResponse } from \"next/server\";\n-import { generateToken } from \"@/lib/auth\";\n-import { verifyTelegramAuth } from \"@/lib/auth\";\n+// import { generateToken } from \"@/lib/auth\";\n+// import { verifyTelegramAuth } from \"@/lib/auth\";\n \n export async function POST(request: NextRequest) {\n   const userData = await request.json();\n \n"
+                },
+                {
+                    "date": 1724928073521,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,6 @@\n-import { generateToken, verifyTelegramAuth } from \"@/app/lib/auth\";\n import { NextRequest, NextResponse } from \"next/server\";\n-// import { generateToken } from \"@/lib/auth\";\n-// import { verifyTelegramAuth } from \"@/lib/auth\";\n+import { verifyTelegramAuth, generateToken } from \"@/lib/auth\";\n \n export async function POST(request: NextRequest) {\n   const userData = await request.json();\n \n"
+                },
+                {
+                    "date": 1724928099453,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n+import { verifyTelegramAuth, generateToken } from \"@/app/lib/auth\";\n import { NextRequest, NextResponse } from \"next/server\";\n-import { verifyTelegramAuth, generateToken } from \"@/lib/auth\";\n+// import { verifyTelegramAuth, generateToken } from \"@/lib/auth\";\n \n export async function POST(request: NextRequest) {\n   const userData = await request.json();\n \n"
+                },
+                {
+                    "date": 1725032441767,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,9 @@\n   const userData = await request.json();\n \n   try {\n     const isValid = verifyTelegramAuth(userData);\n+    console.log(\"Is valid:\", isValid);\n     if (isValid) {\n       const token = generateToken(userData.id.toString());\n       return NextResponse.json({ token });\n     } else {\n"
+                },
+                {
+                    "date": 1725032463320,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,8 +9,9 @@\n     const isValid = verifyTelegramAuth(userData);\n     console.log(\"Is valid:\", isValid);\n     if (isValid) {\n       const token = generateToken(userData.id.toString());\n+      console.log(\"ROUTE Generated token:\", token);\n       return NextResponse.json({ token });\n     } else {\n       return NextResponse.json(\n         { error: \"Invalid authentication\" },\n"
+                },
+                {
+                    "date": 1725033397289,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,9 @@\n // import { verifyTelegramAuth, generateToken } from \"@/lib/auth\";\n \n export async function POST(request: NextRequest) {\n   const userData = await request.json();\n+  console.log(\"ROUTE User data:\", userData);\n \n   try {\n     const isValid = verifyTelegramAuth(userData);\n     console.log(\"Is valid:\", isValid);\n"
+                },
+                {
+                    "date": 1725036630007,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,13 @@\n   const userData = await request.json();\n   console.log(\"ROUTE User data:\", userData);\n \n   try {\n+    console.log(\n+      \"BOT_TOKEN (first 4 chars):\",\n+      process.env.TELEGRAM_BOT_TOKEN?.substring(0, 4)\n+    );\n+\n     const isValid = verifyTelegramAuth(userData);\n     console.log(\"Is valid:\", isValid);\n     if (isValid) {\n       const token = generateToken(userData.id.toString());\n"
+                },
+                {
+                    "date": 1725042184397,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n // import { verifyTelegramAuth, generateToken } from \"@/lib/auth\";\n \n export async function POST(request: NextRequest) {\n   const userData = await request.json();\n-  console.log(\"ROUTE User data:\", userData);\n+  console.log(\"ROUTE User data:\", userData, \" \" + request.body);\n \n   try {\n     console.log(\n       \"BOT_TOKEN (first 4 chars):\",\n"
+                },
+                {
+                    "date": 1725042270670,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,13 @@\n // import { verifyTelegramAuth, generateToken } from \"@/lib/auth\";\n \n export async function POST(request: NextRequest) {\n   const userData = await request.json();\n-  console.log(\"ROUTE User data:\", userData, \" \" + request.body);\n+  console.log(\n+    \"ROUTE User data:\",\n+    userData,\n+    \" \" + JSON.stringify(request.body, null, 2)\n+  );\n \n   try {\n     console.log(\n       \"BOT_TOKEN (first 4 chars):\",\n"
+                },
+                {
+                    "date": 1725042329259,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n   const userData = await request.json();\n   console.log(\n     \"ROUTE User data:\",\n     userData,\n-    \" \" + JSON.stringify(request.body, null, 2)\n+    \" \" + JSON.stringify(await request.body, null, 2)\n   );\n \n   try {\n     console.log(\n"
+                },
+                {
+                    "date": 1725042342136,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,10 +5,10 @@\n export async function POST(request: NextRequest) {\n   const userData = await request.json();\n   console.log(\n     \"ROUTE User data:\",\n-    userData,\n-    \" \" + JSON.stringify(await request.body, null, 2)\n+    userData\n+    // \" \" + JSON.stringify(await request.body, null, 2)\n   );\n \n   try {\n     console.log(\n"
+                },
+                {
+                    "date": 1725100180936,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,29 +1,23 @@\n+import { NextRequest, NextResponse } from \"next/server\";\n import { verifyTelegramAuth, generateToken } from \"@/app/lib/auth\";\n-import { NextRequest, NextResponse } from \"next/server\";\n-// import { verifyTelegramAuth, generateToken } from \"@/lib/auth\";\n \n export async function POST(request: NextRequest) {\n-  const userData = await request.json();\n-  console.log(\n-    \"ROUTE User data:\",\n-    userData\n-    // \" \" + JSON.stringify(await request.body, null, 2)\n-  );\n+  const { initData } = await request.json();\n+  console.log(\"Received initData:\", initData);\n \n   try {\n-    console.log(\n-      \"BOT_TOKEN (first 4 chars):\",\n-      process.env.TELEGRAM_BOT_TOKEN?.substring(0, 4)\n-    );\n-\n-    const isValid = verifyTelegramAuth(userData);\n+    const isValid = verifyTelegramAuth(initData);\n     console.log(\"Is valid:\", isValid);\n     if (isValid) {\n+      const userData = JSON.parse(\n+        new URLSearchParams(initData).get(\"user\") || \"{}\"\n+      );\n       const token = generateToken(userData.id.toString());\n-      console.log(\"ROUTE Generated token:\", token);\n+      console.log(\"Generated token:\", token);\n       return NextResponse.json({ token });\n     } else {\n+      console.log(\"Invalid authentication\");\n       return NextResponse.json(\n         { error: \"Invalid authentication\" },\n         { status: 401 }\n       );\n"
+                },
+                {
+                    "date": 1725101128379,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import { NextRequest, NextResponse } from \"next/server\";\n-import { verifyTelegramAuth, generateToken } from \"@/app/lib/auth\";\n+import { verifyTelegramAuth, generateToken } from \"@/lib/auth\";\n \n export async function POST(request: NextRequest) {\n   const { initData } = await request.json();\n   console.log(\"Received initData:\", initData);\n"
+                },
+                {
+                    "date": 1725101133456,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,32 @@\n+import { NextRequest, NextResponse } from \"next/server\";\n+import { verifyTelegramAuth, generateToken } from \"@/app/lib/auth\";\n+\n+export async function POST(request: NextRequest) {\n+  const { initData } = await request.json();\n+  console.log(\"Received initData:\", initData);\n+\n+  try {\n+    const isValid = verifyTelegramAuth(initData);\n+    console.log(\"Is valid:\", isValid);\n+    if (isValid) {\n+      const userData = JSON.parse(\n+        new URLSearchParams(initData).get(\"user\") || \"{}\"\n+      );\n+      const token = generateToken(userData.id.toString());\n+      console.log(\"Generated token:\", token);\n+      return NextResponse.json({ token });\n+    } else {\n+      console.log(\"Invalid authentication\");\n+      return NextResponse.json(\n+        { error: \"Invalid authentication\" },\n+        { status: 401 }\n+      );\n+    }\n+  } catch (error) {\n+    console.error(\"Authentication error:\", error);\n+    return NextResponse.json(\n+      { error: \"Authentication failed\" },\n+      { status: 500 }\n+    );\n+  }\n+}\n"
+                },
+                {
+                    "date": 1725104054079,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n       const userData = JSON.parse(\n         new URLSearchParams(initData).get(\"user\") || \"{}\"\n       );\n       const token = generateToken(userData.id.toString());\n-      console.log(\"Generated token:\", token);\n+      // console.log(\"Generated token:\", token);\n       return NextResponse.json({ token });\n     } else {\n       console.log(\"Invalid authentication\");\n       return NextResponse.json(\n@@ -29,36 +29,4 @@\n       { status: 500 }\n     );\n   }\n }\n-import { NextRequest, NextResponse } from \"next/server\";\n-import { verifyTelegramAuth, generateToken } from \"@/lib/auth\";\n-\n-export async function POST(request: NextRequest) {\n-  const { initData } = await request.json();\n-  console.log(\"Received initData:\", initData);\n-\n-  try {\n-    const isValid = verifyTelegramAuth(initData);\n-    console.log(\"Is valid:\", isValid);\n-    if (isValid) {\n-      const userData = JSON.parse(\n-        new URLSearchParams(initData).get(\"user\") || \"{}\"\n-      );\n-      const token = generateToken(userData.id.toString());\n-      console.log(\"Generated token:\", token);\n-      return NextResponse.json({ token });\n-    } else {\n-      console.log(\"Invalid authentication\");\n-      return NextResponse.json(\n-        { error: \"Invalid authentication\" },\n-        { status: 401 }\n-      );\n-    }\n-  } catch (error) {\n-    console.error(\"Authentication error:\", error);\n-    return NextResponse.json(\n-      { error: \"Authentication failed\" },\n-      { status: 500 }\n-    );\n-  }\n-}\n"
+                },
+                {
+                    "date": 1725142301311,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,39 @@\n+// import { NextRequest, NextResponse } from \"next/server\";\n+// import { verifyTelegramAuth, generateToken } from \"@/app/lib/auth\";\n+\n+// export async function POST(request: NextRequest) {\n+//   const { initData } = await request.json();\n+//   console.log(\"Received initData:\", initData);\n+\n+//   try {\n+//     const isValid = verifyTelegramAuth(initData);\n+//     console.log(\"Is valid:\", isValid);\n+//     if (isValid) {\n+//       const userData = JSON.parse(\n+//         new URLSearchParams(initData).get(\"user\") || \"{}\"\n+//       );\n+//       const token = generateToken(userData.id.toString());\n+//       // console.log(\"Generated token:\", token);\n+//       return NextResponse.json({ token });\n+//     } else {\n+//       console.log(\"Invalid authentication\");\n+//       return NextResponse.json(\n+//         { error: \"Invalid authentication\" },\n+//         { status: 401 }\n+//       );\n+//     }\n+//   } catch (error) {\n+//     console.error(\"Authentication error:\", error);\n+//     return NextResponse.json(\n+//       { error: \"Authentication failed\" },\n+//       { status: 500 }\n+//     );\n+//   }\n+// }\n import { NextRequest, NextResponse } from \"next/server\";\n-import { verifyTelegramAuth, generateToken } from \"@/app/lib/auth\";\n+import { verifyTelegramAuth } from \"@/app/lib/auth\";\n+import { cookies } from \"next/headers\";\n \n export async function POST(request: NextRequest) {\n   const { initData } = await request.json();\n   console.log(\"Received initData:\", initData);\n@@ -11,11 +44,22 @@\n     if (isValid) {\n       const userData = JSON.parse(\n         new URLSearchParams(initData).get(\"user\") || \"{}\"\n       );\n-      const token = generateToken(userData.id.toString());\n-      // console.log(\"Generated token:\", token);\n-      return NextResponse.json({ token });\n+\n+      // Instead of generating a token, we'll set a cookie with the user data\n+      const userCookie = JSON.stringify(userData);\n+\n+      // Set the cookie\n+      cookies().set(\"user\", userCookie, {\n+        httpOnly: true,\n+        secure: process.env.NODE_ENV === \"production\",\n+        sameSite: \"strict\",\n+        maxAge: 86400, // 1 day\n+        path: \"/\",\n+      });\n+\n+      return NextResponse.json({ success: true });\n     } else {\n       console.log(\"Invalid authentication\");\n       return NextResponse.json(\n         { error: \"Invalid authentication\" },\n"
+                },
+                {
+                    "date": 1725142491005,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n //     );\n //   }\n // }\n import { NextRequest, NextResponse } from \"next/server\";\n-import { verifyTelegramAuth } from \"@/app/lib/auth\";\n+import { verifyTelegramAuth, generateToken } from \"@/app/lib/auth\";\n import { cookies } from \"next/headers\";\n \n export async function POST(request: NextRequest) {\n   const { initData } = await request.json();\n@@ -44,14 +44,12 @@\n     if (isValid) {\n       const userData = JSON.parse(\n         new URLSearchParams(initData).get(\"user\") || \"{}\"\n       );\n+      const token = generateToken(userData.id.toString());\n \n-      // Instead of generating a token, we'll set a cookie with the user data\n-      const userCookie = JSON.stringify(userData);\n-\n-      // Set the cookie\n-      cookies().set(\"user\", userCookie, {\n+      // Set the token in an HTTP-only cookie\n+      cookies().set(\"auth_token\", token, {\n         httpOnly: true,\n         secure: process.env.NODE_ENV === \"production\",\n         sameSite: \"strict\",\n         maxAge: 86400, // 1 day\n"
+                },
+                {
+                    "date": 1725143112284,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,11 +41,13 @@\n   try {\n     const isValid = verifyTelegramAuth(initData);\n     console.log(\"Is valid:\", isValid);\n     if (isValid) {\n-      const userData = JSON.parse(\n-        new URLSearchParams(initData).get(\"user\") || \"{}\"\n-      );\n+      const userParams = new URLSearchParams(initData).get(\"user\");\n+      if (!userParams) {\n+        throw new Error(\"User data not found in initData\");\n+      }\n+      const userData = JSON.parse(userParams);\n       const token = generateToken(userData.id.toString());\n \n       // Set the token in an HTTP-only cookie\n       cookies().set(\"auth_token\", token, {\n"
+                },
+                {
+                    "date": 1725143468305,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,13 +41,11 @@\n   try {\n     const isValid = verifyTelegramAuth(initData);\n     console.log(\"Is valid:\", isValid);\n     if (isValid) {\n-      const userParams = new URLSearchParams(initData).get(\"user\");\n-      if (!userParams) {\n-        throw new Error(\"User data not found in initData\");\n-      }\n-      const userData = JSON.parse(userParams);\n+      const userData = JSON.parse(\n+        new URLSearchParams(initData).get(\"user\") || \"{}\"\n+      );\n       const token = generateToken(userData.id.toString());\n \n       // Set the token in an HTTP-only cookie\n       cookies().set(\"auth_token\", token, {\n"
+                },
+                {
+                    "date": 1725143991260,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -50,9 +50,9 @@\n       // Set the token in an HTTP-only cookie\n       cookies().set(\"auth_token\", token, {\n         httpOnly: true,\n         secure: process.env.NODE_ENV === \"production\",\n-        sameSite: \"strict\",\n+        sameSite: \"lax\", // Changed from 'strict' to allow cross-site requests\n         maxAge: 86400, // 1 day\n         path: \"/\",\n       });\n \n"
+                },
+                {
+                    "date": 1725144449383,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,20 +44,24 @@\n     if (isValid) {\n       const userData = JSON.parse(\n         new URLSearchParams(initData).get(\"user\") || \"{}\"\n       );\n+      console.log(\"Parsed user data:\", userData);\n       const token = generateToken(userData.id.toString());\n+      console.log(\"Generated token:\", token);\n \n-      // Set the token in an HTTP-only cookie\n       cookies().set(\"auth_token\", token, {\n         httpOnly: true,\n         secure: process.env.NODE_ENV === \"production\",\n-        sameSite: \"lax\", // Changed from 'strict' to allow cross-site requests\n+        sameSite: \"lax\",\n         maxAge: 86400, // 1 day\n         path: \"/\",\n       });\n \n-      return NextResponse.json({ success: true });\n+      return NextResponse.json({\n+        success: true,\n+        message: \"Authentication successful\",\n+      });\n     } else {\n       console.log(\"Invalid authentication\");\n       return NextResponse.json(\n         { error: \"Invalid authentication\" },\n@@ -66,9 +70,12 @@\n     }\n   } catch (error) {\n     console.error(\"Authentication error:\", error);\n     return NextResponse.json(\n-      { error: \"Authentication failed\" },\n+      {\n+        error: \"Authentication failed\",\n+        details: error instanceof Error ? error.message : String(error),\n+      },\n       { status: 500 }\n     );\n   }\n }\n"
+                },
+                {
+                    "date": 1725166737855,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,24 +44,20 @@\n     if (isValid) {\n       const userData = JSON.parse(\n         new URLSearchParams(initData).get(\"user\") || \"{}\"\n       );\n-      console.log(\"Parsed user data:\", userData);\n       const token = generateToken(userData.id.toString());\n-      console.log(\"Generated token:\", token);\n \n+      // Set the token in an HTTP-only cookie\n       cookies().set(\"auth_token\", token, {\n         httpOnly: true,\n         secure: process.env.NODE_ENV === \"production\",\n-        sameSite: \"lax\",\n+        sameSite: \"lax\", // Changed from 'strict' to allow cross-site requests\n         maxAge: 86400, // 1 day\n         path: \"/\",\n       });\n \n-      return NextResponse.json({\n-        success: true,\n-        message: \"Authentication successful\",\n-      });\n+      return NextResponse.json({ success: true });\n     } else {\n       console.log(\"Invalid authentication\");\n       return NextResponse.json(\n         { error: \"Invalid authentication\" },\n@@ -70,12 +66,9 @@\n     }\n   } catch (error) {\n     console.error(\"Authentication error:\", error);\n     return NextResponse.json(\n-      {\n-        error: \"Authentication failed\",\n-        details: error instanceof Error ? error.message : String(error),\n-      },\n+      { error: \"Authentication failed\" },\n       { status: 500 }\n     );\n   }\n }\n"
+                },
+                {
+                    "date": 1725166965317,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,8 +29,9 @@\n //       { status: 500 }\n //     );\n //   }\n // }\n+\n import { NextRequest, NextResponse } from \"next/server\";\n import { verifyTelegramAuth, generateToken } from \"@/app/lib/auth\";\n import { cookies } from \"next/headers\";\n \n@@ -50,9 +51,9 @@\n       // Set the token in an HTTP-only cookie\n       cookies().set(\"auth_token\", token, {\n         httpOnly: true,\n         secure: process.env.NODE_ENV === \"production\",\n-        sameSite: \"lax\", // Changed from 'strict' to allow cross-site requests\n+        sameSite: \"strict\",\n         maxAge: 86400, // 1 day\n         path: \"/\",\n       });\n \n"
+                },
+                {
+                    "date": 1725168663453,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,11 +29,10 @@\n //       { status: 500 }\n //     );\n //   }\n // }\n-\n import { NextRequest, NextResponse } from \"next/server\";\n-import { verifyTelegramAuth, generateToken } from \"@/app/lib/auth\";\n+import { verifyTelegramAuth, generateToken } from \"@/lib/auth\";\n import { cookies } from \"next/headers\";\n \n export async function POST(request: NextRequest) {\n   const { initData } = await request.json();\n@@ -46,8 +45,9 @@\n       const userData = JSON.parse(\n         new URLSearchParams(initData).get(\"user\") || \"{}\"\n       );\n       const token = generateToken(userData.id.toString());\n+      console.log(\"Generated token:\", token);\n \n       // Set the token in an HTTP-only cookie\n       cookies().set(\"auth_token\", token, {\n         httpOnly: true,\n"
+                },
+                {
+                    "date": 1725168676365,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n //     );\n //   }\n // }\n import { NextRequest, NextResponse } from \"next/server\";\n-import { verifyTelegramAuth, generateToken } from \"@/lib/auth\";\n+import { verifyTelegramAuth, generateToken } from \"@/app/lib/auth\";\n import { cookies } from \"next/headers\";\n \n export async function POST(request: NextRequest) {\n   const { initData } = await request.json();\n"
+                },
+                {
+                    "date": 1725169811571,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,9 +45,8 @@\n       const userData = JSON.parse(\n         new URLSearchParams(initData).get(\"user\") || \"{}\"\n       );\n       const token = generateToken(userData.id.toString());\n-      console.log(\"Generated token:\", token);\n \n       // Set the token in an HTTP-only cookie\n       cookies().set(\"auth_token\", token, {\n         httpOnly: true,\n"
+                },
+                {
+                    "date": 1725172935351,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,8 +32,9 @@\n // }\n import { NextRequest, NextResponse } from \"next/server\";\n import { verifyTelegramAuth, generateToken } from \"@/app/lib/auth\";\n import { cookies } from \"next/headers\";\n+import { log } from \"console\";\n \n export async function POST(request: NextRequest) {\n   const { initData } = await request.json();\n   console.log(\"Received initData:\", initData);\n@@ -45,8 +46,11 @@\n       const userData = JSON.parse(\n         new URLSearchParams(initData).get(\"user\") || \"{}\"\n       );\n       const token = generateToken(userData.id.toString());\n+      console.log(\"Generated token:\", token);\n+      console.log(\"cookies\", cookies());\n+      console.log(\"userData\", userData);\n \n       // Set the token in an HTTP-only cookie\n       cookies().set(\"auth_token\", token, {\n         httpOnly: true,\n"
+                },
+                {
+                    "date": 1725175854045,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -59,9 +59,9 @@\n         maxAge: 86400, // 1 day\n         path: \"/\",\n       });\n \n-      return NextResponse.json({ success: true });\n+      return NextResponse.json({ success: true, user: userData });\n     } else {\n       console.log(\"Invalid authentication\");\n       return NextResponse.json(\n         { error: \"Invalid authentication\" },\n"
+                },
+                {
+                    "date": 1725177126252,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -55,9 +55,9 @@\n       cookies().set(\"auth_token\", token, {\n         httpOnly: true,\n         secure: process.env.NODE_ENV === \"production\",\n         sameSite: \"strict\",\n-        maxAge: 86400, // 1 day\n+        // maxAge: 86400, // 1 day\n         path: \"/\",\n       });\n \n       return NextResponse.json({ success: true, user: userData });\n"
+                }
+            ],
+            "date": 1724756542643,
+            "name": "Commit-0",
+            "content": "import { NextRequest, NextResponse } from \"next/server\";\nimport { verifyTelegramAuth } from \"@/lib/auth\";\n\nexport async function POST(request: NextRequest) {\n  const userData: TelegramAuthData = await request.json();\n\n  try {\n    const isValid = verifyTelegramAuth(userData);\n    if (isValid) {\n      const token = generateToken(userData);\n      return NextResponse.json({ token });\n    } else {\n      return NextResponse.json(\n        { error: \"Invalid authentication\" },\n        { status: 401 }\n      );\n    }\n  } catch (error) {\n    return NextResponse.json(\n      { error: \"Authentication failed\" },\n      { status: 500 }\n    );\n  }\n}\n\nfunction generateToken(userData: TelegramAuthData): string {\n  // Implement your token generation logic here\n  return \"your-generated-token\";\n}\n"
+        }
+    ]
+}

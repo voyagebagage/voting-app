@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/app/hooks/useTelegramInitData.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1725048070004,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1725048070004,
+            "name": "Commit-0",
+            "content": "import { useEffect, useState } from \"react\";\n\ninterface TelegramWebAppInitData {\n  [key: string]: any;\n}\n\nfunction useTelegramInitData() {\n  const [data, setData] = useState<TelegramWebAppInitData>({});\n\n  useEffect(() => {\n    if (typeof window !== \"undefined\" && window.Telegram?.WebApp) {\n      const firstLayerInitData = Object.fromEntries(\n        new URLSearchParams(window.Telegram.WebApp.initData)\n      );\n\n      const initData: Record<string, any> = {};\n\n      for (const key in firstLayerInitData) {\n        try {\n          initData[key] = JSON.parse(firstLayerInitData[key]);\n        } catch {\n          initData[key] = firstLayerInitData[key];\n        }\n      }\n\n      setData(initData);\n    }\n  }, []);\n\n  return data;\n}\n\nexport default useTelegramInitData;\n"
+        }
+    ]
+}

@@ -1,0 +1,38 @@
+{
+    "sourceFile": "src/app/api/auth/verify/route.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 5,
+            "patches": [
+                {
+                    "date": 1724847503260,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1724926888498,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,6 @@\n import { NextRequest, NextResponse } from \"next/server\";\n-import { verifyToken } from \"../auth\";\n-// import { verifyToken } from \"@/app/auth/auth\";\n+import { verifyToken } from \"@/app/auth/auth\";\n \n export async function GET(request: NextRequest) {\n   const token = request.headers.get(\"Authorization\")?.split(\" \")[1];\n \n"
+                },
+                {
+                    "date": 1724926895985,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n import { NextRequest, NextResponse } from \"next/server\";\n-import { verifyToken } from \"@/app/auth/auth\";\n+import { verifyToken } from \"../auth\";\n+// import { verifyToken } from \"@/app/auth/auth\";\n \n export async function GET(request: NextRequest) {\n   const token = request.headers.get(\"Authorization\")?.split(\" \")[1];\n \n"
+                },
+                {
+                    "date": 1725036407247,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import { NextRequest, NextResponse } from \"next/server\";\n-import { verifyToken } from \"../auth\";\n+// import { verifyToken } from \"../auth\";\n // import { verifyToken } from \"@/app/auth/auth\";\n \n export async function GET(request: NextRequest) {\n   const token = request.headers.get(\"Authorization\")?.split(\" \")[1];\n"
+                },
+                {
+                    "date": 1725036415257,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,5 @@\n+import { verifyToken } from \"@/app/lib/auth\";\n import { NextRequest, NextResponse } from \"next/server\";\n // import { verifyToken } from \"../auth\";\n // import { verifyToken } from \"@/app/auth/auth\";\n \n"
+                },
+                {
+                    "date": 1725142638373,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,20 +1,26 @@\n+import { NextRequest, NextResponse } from \"next/server\";\n import { verifyToken } from \"@/app/lib/auth\";\n-import { NextRequest, NextResponse } from \"next/server\";\n-// import { verifyToken } from \"../auth\";\n-// import { verifyToken } from \"@/app/auth/auth\";\n+import { cookies } from \"next/headers\";\n \n export async function GET(request: NextRequest) {\n-  const token = request.headers.get(\"Authorization\")?.split(\" \")[1];\n+  const authToken = cookies().get(\"auth_token\")?.value;\n \n-  if (!token) {\n+  if (!authToken) {\n     return NextResponse.json({ error: \"No token provided\" }, { status: 401 });\n   }\n \n-  const userData = verifyToken(token);\n-\n-  if (userData) {\n-    return NextResponse.json(userData);\n-  } else {\n-    return NextResponse.json({ error: \"Invalid token\" }, { status: 401 });\n+  try {\n+    const userData = verifyToken(authToken);\n+    if (userData) {\n+      return NextResponse.json({ user: userData });\n+    } else {\n+      return NextResponse.json({ error: \"Invalid token\" }, { status: 401 });\n+    }\n+  } catch (error) {\n+    console.error(\"Token verification error:\", error);\n+    return NextResponse.json(\n+      { error: \"Token verification failed\" },\n+      { status: 500 }\n+    );\n   }\n }\n"
+                }
+            ],
+            "date": 1724847503260,
+            "name": "Commit-0",
+            "content": "import { NextRequest, NextResponse } from \"next/server\";\nimport { verifyToken } from \"../auth\";\n// import { verifyToken } from \"@/app/auth/auth\";\n\nexport async function GET(request: NextRequest) {\n  const token = request.headers.get(\"Authorization\")?.split(\" \")[1];\n\n  if (!token) {\n    return NextResponse.json({ error: \"No token provided\" }, { status: 401 });\n  }\n\n  const userData = verifyToken(token);\n\n  if (userData) {\n    return NextResponse.json(userData);\n  } else {\n    return NextResponse.json({ error: \"Invalid token\" }, { status: 401 });\n  }\n}\n"
+        }
+    ]
+}

@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/app/api/auth/telegram/route.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1724755923759,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1724755923759,
+            "name": "Commit-0",
+            "content": "import { NextRequest, NextResponse } from \"next/server\";\nimport { verifyTelegramAuth } from \"@/lib/auth\";\n\nexport async function POST(request: NextRequest) {\n  const userData: any = await request.json();\n\n  try {\n    const isValid = await verifyTelegramAuth(userData);\n    if (isValid) {\n      const token = generateToken(userData);\n      return NextResponse.json({ token });\n    } else {\n      return NextResponse.json(\n        { error: \"Invalid authentication\" },\n        { status: 401 }\n      );\n    }\n  } catch (error) {\n    return NextResponse.json(\n      { error: \"Authentication failed\" },\n      { status: 500 }\n    );\n  }\n}\n\nfunction generateToken(userData: any): string {\n  // Implement your token generation logic here\n  return \"your-generated-token\";\n}\n"
+        }
+    ]
+}

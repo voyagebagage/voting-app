@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/middleware.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1724756025805,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1724756025805,
+            "name": "Commit-0",
+            "content": "import { NextResponse } from \"next/server\";\nimport type { NextRequest } from \"next/server\";\n\nexport function middleware(request: NextRequest) {\n  const token = request.cookies.get(\"token\");\n  if (!token && !request.nextUrl.pathname.startsWith(\"/login\")) {\n    return NextResponse.redirect(new URL(\"/login\", request.url));\n  }\n  return NextResponse.next();\n}\n\nexport const config = {\n  matcher: [\"/((?!api|_next/static|_next/image|favicon.ico).*)\"],\n};\n"
+        }
+    ]
+}

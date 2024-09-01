@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/app/lib/googleMapApi.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1724759469369,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1724759469369,
+            "name": "Commit-0",
+            "content": "import axios from \"axios\";\n\nconst GOOGLE_MAPS_API_KEY = process.env.GOOGLE_MAPS_API_KEY;\n\nexport async function fetchPlacesFromGoogle(\n  category: string,\n  location: string\n) {\n  try {\n    const response = await axios.get(\n      `https://maps.googleapis.com/maps/api/place/textsearch/json`,\n      {\n        params: {\n          query: `${category} in ${location}`,\n          key: GOOGLE_MAPS_API_KEY,\n        },\n      }\n    );\n\n    return response.data.results.map((place: any) => ({\n      name: place.name,\n      category,\n      type: \"place\",\n      googlePlaceId: place.place_id,\n      location: place.formatted_address,\n      distance: null, // You'd need to calculate this based on user's location\n      googleUrl: `https://www.google.com/maps/place/?q=place_id:${place.place_id}`,\n      rating: place.rating,\n      addedBy: \"system\",\n    }));\n  } catch (error) {\n    console.error(\"Error fetching places from Google:\", error);\n    throw error;\n  }\n}\n"
+        }
+    ]
+}

@@ -1,0 +1,26 @@
+{
+    "sourceFile": "src/telegram-login.d.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1724766352996,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1725102005056,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,15 +1,33 @@\n // src/telegram-login.d.ts\n+// src/telegram.d.ts\n \n interface TelegramUser {\n   id: number;\n   first_name: string;\n   last_name?: string;\n   username?: string;\n-  photo_url?: string;\n+  language_code?: string;\n+  allows_write_to_pm?: boolean;\n   auth_date: number;\n   hash: string;\n }\n \n+declare global {\n+  interface Window {\n+    Telegram?: {\n+      WebApp?: {\n+        initDataUnsafe: {\n+          user?: TelegramUser;\n+          auth_date: string;\n+          hash: string;\n+          query_id?: string;\n+        };\n+        initData: string;\n+        ready: () => void;\n+      };\n+    };\n+  }\n+}\n interface Window {\n   onTelegramAuth: (user: TelegramUser) => void;\n }\n"
+                },
+                {
+                    "date": 1725102010129,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,7 +27,7 @@\n       };\n     };\n   }\n }\n-interface Window {\n-  onTelegramAuth: (user: TelegramUser) => void;\n-}\n+// interface Window {\n+//   onTelegramAuth: (user: TelegramUser) => void;\n+// }\n"
+                }
+            ],
+            "date": 1724766352996,
+            "name": "Commit-0",
+            "content": "// src/telegram-login.d.ts\n\ninterface TelegramUser {\n  id: number;\n  first_name: string;\n  last_name?: string;\n  username?: string;\n  photo_url?: string;\n  auth_date: number;\n  hash: string;\n}\n\ninterface Window {\n  onTelegramAuth: (user: TelegramUser) => void;\n}\n"
+        }
+    ]
+}

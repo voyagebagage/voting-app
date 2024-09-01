@@ -1,0 +1,22 @@
+{
+    "sourceFile": "next.config.mjs",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1724845470857,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1724846438793,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,5 +5,5 @@\n     NEXT_PUBLIC_TELEGRAM_BOT_NAME: process.env.NEXT_PUBLIC_TELEGRAM_BOT_NAME,\n   },\n };\n \n-module.exports = nextConfig;\n+export default nextConfig;\n"
+                }
+            ],
+            "date": 1724845470857,
+            "name": "Commit-0",
+            "content": "/** @type {import('next').NextConfig} */\nconst nextConfig = {\n  reactStrictMode: true,\n  env: {\n    NEXT_PUBLIC_TELEGRAM_BOT_NAME: process.env.NEXT_PUBLIC_TELEGRAM_BOT_NAME,\n  },\n};\n\nmodule.exports = nextConfig;\n"
+        }
+    ]
+}

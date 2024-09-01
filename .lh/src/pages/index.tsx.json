@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/pages/index.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1725048115907,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1725048115907,
+            "name": "Commit-0",
+            "content": "import { useEffect } from \"react\";\nimport { useRouter } from \"next/router\";\nimport useTelegramInitData from \"../hooks/useTelegramInitData\";\n\nexport default function Home() {\n  const router = useRouter();\n  const initData = useTelegramInitData();\n\n  useEffect(() => {\n    if (initData.user) {\n      // User is authenticated, you can use initData.user here\n      console.log(\"User data:\", initData.user);\n    } else {\n      // Redirect to login if no user data\n      router.push(\"/login\");\n    }\n  }, [initData, router]);\n\n  if (!initData.user) {\n    return <div>Loading...</div>;\n  }\n\n  return (\n    <div>\n      <h1>Welcome, {initData.user.first_name}!</h1>\n      {/* Rest of your app */}\n    </div>\n  );\n}\n"
+        }
+    ]
+}

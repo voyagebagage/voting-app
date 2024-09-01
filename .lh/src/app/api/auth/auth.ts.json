@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/app/api/auth/auth.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1724760280215,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1724846958032,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,4 +12,14 @@\n \n export function generateToken(userId: string): string {\n   return jwt.sign({ userId }, JWT_SECRET, { expiresIn: \"1d\" });\n }\n+\n+export async function verifyTokenAndGetUser(token: string) {\n+  const response = await fetch(\"/api/auth/verify\", {\n+    headers: { Authorization: `Bearer ${token}` },\n+  });\n+  if (response.ok) {\n+    return response.json();\n+  }\n+  throw new Error(\"Invalid token\");\n+}\n"
+                }
+            ],
+            "date": 1724760280215,
+            "name": "Commit-0",
+            "content": "import jwt from \"jsonwebtoken\";\n\nconst JWT_SECRET = process.env.JWT_SECRET as string;\n\nexport function verifyToken(token: string): { userId: string } | null {\n  try {\n    return jwt.verify(token, JWT_SECRET) as { userId: string };\n  } catch (error) {\n    return null;\n  }\n}\n\nexport function generateToken(userId: string): string {\n  return jwt.sign({ userId }, JWT_SECRET, { expiresIn: \"1d\" });\n}\n"
+        }
+    ]
+}

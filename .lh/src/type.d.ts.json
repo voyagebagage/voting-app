@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/type.d.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1725102074345,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1725102074345,
+            "name": "Commit-0",
+            "content": "// src/types.ts\n\nexport interface TelegramUser {\n  id: number;\n  first_name: string;\n  last_name?: string;\n  username?: string;\n  language_code?: string;\n  allows_write_to_pm?: boolean;\n  auth_date: number;\n  hash: string;\n}\n"
+        }
+    ]
+}
