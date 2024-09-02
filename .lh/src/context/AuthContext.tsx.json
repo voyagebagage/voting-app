@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 17,
+            "activePatchIndex": 19,
             "patches": [
                 {
                     "date": 1725141505538,
@@ -76,6 +76,14 @@
                 {
                     "date": 1725264274028,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n   useEffect(() => {\n     console.log(\"AuthProvider useEffect running\");\n     // Check if user is already authenticated\n     const checkAuth = async () => {\n-      if (window) {\n+      if (typeof window !== \"undefined\") {\n         const storedUser = localStorage.getItem(\"user\");\n         if (storedUser) {\n           setUser(JSON.parse(storedUser));\n         } else {\n"
+                },
+                {
+                    "date": 1725266484459,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,31 +16,22 @@\n }) => {\n   const [user, setUser] = useState<TelegramUser | null>(null);\n \n   useEffect(() => {\n-    console.log(\"AuthProvider useEffect running\");\n     // Check if user is already authenticated\n     const checkAuth = async () => {\n-      if (typeof window !== \"undefined\") {\n-        const storedUser = localStorage.getItem(\"user\");\n-        if (storedUser) {\n-          setUser(JSON.parse(storedUser));\n-        } else {\n-          try {\n-            const response = await fetch(\"/api/auth/verify\", {\n-              credentials: \"include\", // This is important for sending cookies\n-            });\n-            if (response.ok) {\n-              const data = await response.json();\n-              if (data.user) {\n-                setUser(data.user);\n-                localStorage.setItem(\"user\", JSON.stringify(data.user));\n-              }\n-            }\n-          } catch (error) {\n-            console.error(\"Error checking authentication:\", error);\n+      try {\n+        const response = await fetch(\"/api/auth/verify\", {\n+          credentials: \"include\", // This is important for sending cookies\n+        });\n+        if (response.ok) {\n+          const data = await response.json();\n+          if (data.user) {\n+            setUser(data.user);\n           }\n         }\n+      } catch (error) {\n+        console.error(\"Error checking authentication:\", error);\n       }\n     };\n \n     checkAuth();\n@@ -51,10 +42,8 @@\n   const login = (userData: TelegramUser) => {\n     console.log(\"User data: LOGIN\", userData);\n \n     setUser(userData);\n-    if (typeof window !== \"undefined\")\n-      localStorage.setItem(\"user\", JSON.stringify(userData));\n   };\n \n   const logout = async () => {\n     try {\n"
+                },
+                {
+                    "date": 1725270136354,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,11 +35,9 @@\n     };\n \n     checkAuth();\n   }, []);\n-  useEffect(() => {\n-    console.log(\"User state updated:\", user);\n-  }, [user]);\n+\n   const login = (userData: TelegramUser) => {\n     console.log(\"User data: LOGIN\", userData);\n \n     setUser(userData);\n"
                 }
             ],
             "date": 1725141505538,

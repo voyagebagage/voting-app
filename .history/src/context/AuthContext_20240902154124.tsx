@@ -36,7 +36,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
     checkAuth();
   }, []);
-
+  useEffect(() => {
+    console.log("User state updated:", user);
+  }, [user]);
   const login = (userData: TelegramUser) => {
     console.log("User data: LOGIN", userData);
 

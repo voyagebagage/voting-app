@@ -120,11 +120,11 @@ export default function Login() {
             return response.json();
           })
           .then((data) => {
-            if (data.success && data.user && !user) {
+            if (data.success && data.user) {
               console.log("Login successful, user data:", data.user);
               login(data.user);
-              // history.pushState({}, "", "/");
-              router.push("/");
+              history.pushState({}, "", "/");
+              //   router.push("/");
             } else {
               throw new Error("Authentication failed");
             }
@@ -141,7 +141,7 @@ export default function Login() {
         "Telegram WebApp is not available. Please open this app from Telegram."
       );
     }
-  }, [login, router]);
+  }, [login]);
 
   if (error) {
     return <div>{error}</div>;

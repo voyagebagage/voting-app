@@ -1,0 +1,34 @@
+{
+    "sourceFile": "src/app/middleware.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 4,
+            "patches": [
+                {
+                    "date": 1725269623434,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1725269682644,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n import { NextApiRequest, NextApiResponse } from \"next\";\n \n const cors = Cors({\n   methods: [\"GET\", \"HEAD\", \"POST\"],\n-  origin: [process.env.NEXT_PUBLIC_APP_URL, \"http://localhost:3000\"],\n+  origin: [process.env.NEXT_PUBLIC_APP_URL as string, \"http://localhost:3000\"],\n   credentials: true,\n });\n \n export function runMiddleware(\n"
+                },
+                {
+                    "date": 1725270877931,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,19 +13,19 @@\n //   matcher: [\"/((?!api|_next/static|_next/image|favicon.ico).*)\"],\n // };\n \n import Cors from \"cors\";\n-import { NextApiRequest, NextApiResponse } from \"next\";\n+import { NextRequest, NextResponse } from \"next/server\";\n \n const cors = Cors({\n   methods: [\"GET\", \"HEAD\", \"POST\"],\n   origin: [process.env.NEXT_PUBLIC_APP_URL as string, \"http://localhost:3000\"],\n   credentials: true,\n });\n \n export function runMiddleware(\n-  req: NextApiRequest,\n-  res: NextApiResponse,\n+  req: NextRequest,\n+  res: NextResponse,\n   fn: Function\n ) {\n   return new Promise((resolve, reject) => {\n     fn(req, res, (result: any) => {\n"
+                },
+                {
+                    "date": 1725272189974,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,19 +21,16 @@\n   origin: [process.env.NEXT_PUBLIC_APP_URL as string, \"http://localhost:3000\"],\n   credentials: true,\n });\n \n-export function runMiddleware(\n-  req: NextRequest,\n-  res: NextResponse,\n-  fn: Function\n-) {\n+export function runMiddleware(req: NextRequest) {\n   return new Promise((resolve, reject) => {\n-    fn(req, res, (result: any) => {\n+    const res = new NextResponse();\n+    cors(req as any, res as any, (result: any) => {\n       if (result instanceof Error) {\n         return reject(result);\n       }\n-      return resolve(result);\n+      return resolve(res);\n     });\n   });\n }\n \n"
+                },
+                {
+                    "date": 1725272332162,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,26 +12,33 @@\n // export const config = {\n //   matcher: [\"/((?!api|_next/static|_next/image|favicon.ico).*)\"],\n // };\n \n-import Cors from \"cors\";\n import { NextRequest, NextResponse } from \"next/server\";\n \n-const cors = Cors({\n-  methods: [\"GET\", \"HEAD\", \"POST\"],\n-  origin: [process.env.NEXT_PUBLIC_APP_URL as string, \"http://localhost:3000\"],\n-  credentials: true,\n-});\n+const allowedOrigins = [\n+  process.env.NEXT_PUBLIC_NGROK_URL || \"\",\n+  \"http://localhost:3000\",\n+];\n \n-export function runMiddleware(req: NextRequest) {\n-  return new Promise((resolve, reject) => {\n-    const res = new NextResponse();\n-    cors(req as any, res as any, (result: any) => {\n-      if (result instanceof Error) {\n-        return reject(result);\n-      }\n-      return resolve(res);\n-    });\n-  });\n+export function corsMiddleware(request: NextRequest) {\n+  const origin = request.headers.get(\"origin\") || \"\";\n+  const isAllowedOrigin = allowedOrigins.includes(origin);\n+\n+  const response = NextResponse.next();\n+\n+  if (isAllowedOrigin) {\n+    response.headers.set(\"Access-Control-Allow-Origin\", origin);\n+  }\n+\n+  response.headers.set(\n+    \"Access-Control-Allow-Methods\",\n+    \"GET, POST, PUT, DELETE, OPTIONS\"\n+  );\n+  response.headers.set(\n+    \"Access-Control-Allow-Headers\",\n+    \"Content-Type, Authorization\"\n+  );\n+  response.headers.set(\"Access-Control-Allow-Credentials\", \"true\");\n+\n+  return response;\n }\n-\n-export default cors;\n"
+                }
+            ],
+            "date": 1725269623434,
+            "name": "Commit-0",
+            "content": "// import { NextResponse } from \"next/server\";\n// import type { NextRequest } from \"next/server\";\n\n// export function middleware(request: NextRequest) {\n//   const token = request.cookies.get(\"token\");\n//   if (!token && !request.nextUrl.pathname.startsWith(\"/login\")) {\n//     return NextResponse.redirect(new URL(\"/login\", request.url));\n//   }\n//   return NextResponse.next();\n// }\n\n// export const config = {\n//   matcher: [\"/((?!api|_next/static|_next/image|favicon.ico).*)\"],\n// };\n\nimport Cors from \"cors\";\nimport { NextApiRequest, NextApiResponse } from \"next\";\n\nconst cors = Cors({\n  methods: [\"GET\", \"HEAD\", \"POST\"],\n  origin: [process.env.NEXT_PUBLIC_APP_URL, \"http://localhost:3000\"],\n  credentials: true,\n});\n\nexport function runMiddleware(\n  req: NextApiRequest,\n  res: NextApiResponse,\n  fn: Function\n) {\n  return new Promise((resolve, reject) => {\n    fn(req, res, (result: any) => {\n      if (result instanceof Error) {\n        return reject(result);\n      }\n      return resolve(result);\n    });\n  });\n}\n\nexport default cors;\n"
+        }
+    ]
+}

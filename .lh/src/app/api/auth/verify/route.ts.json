@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 5,
+            "activePatchIndex": 13,
             "patches": [
                 {
                     "date": 1724847503260,
@@ -28,6 +28,38 @@
                 {
                     "date": 1725142638373,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,20 +1,26 @@\n+import { NextRequest, NextResponse } from \"next/server\";\n import { verifyToken } from \"@/app/lib/auth\";\n-import { NextRequest, NextResponse } from \"next/server\";\n-// import { verifyToken } from \"../auth\";\n-// import { verifyToken } from \"@/app/auth/auth\";\n+import { cookies } from \"next/headers\";\n \n export async function GET(request: NextRequest) {\n-  const token = request.headers.get(\"Authorization\")?.split(\" \")[1];\n+  const authToken = cookies().get(\"auth_token\")?.value;\n \n-  if (!token) {\n+  if (!authToken) {\n     return NextResponse.json({ error: \"No token provided\" }, { status: 401 });\n   }\n \n-  const userData = verifyToken(token);\n-\n-  if (userData) {\n-    return NextResponse.json(userData);\n-  } else {\n-    return NextResponse.json({ error: \"Invalid token\" }, { status: 401 });\n+  try {\n+    const userData = verifyToken(authToken);\n+    if (userData) {\n+      return NextResponse.json({ user: userData });\n+    } else {\n+      return NextResponse.json({ error: \"Invalid token\" }, { status: 401 });\n+    }\n+  } catch (error) {\n+    console.error(\"Token verification error:\", error);\n+    return NextResponse.json(\n+      { error: \"Token verification failed\" },\n+      { status: 500 }\n+    );\n   }\n }\n"
+                },
+                {
+                    "date": 1725269743499,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n import { NextRequest, NextResponse } from \"next/server\";\n import { verifyToken } from \"@/app/lib/auth\";\n import { cookies } from \"next/headers\";\n+import cors, { runMiddleware } from \"@/app/middleware\";\n \n export async function GET(request: NextRequest) {\n   const authToken = cookies().get(\"auth_token\")?.value;\n \n@@ -9,8 +10,10 @@\n     return NextResponse.json({ error: \"No token provided\" }, { status: 401 });\n   }\n \n   try {\n+    await runMiddleware(req, NextResponse.next(), cors);\n+\n     const userData = verifyToken(authToken);\n     if (userData) {\n       return NextResponse.json({ user: userData });\n     } else {\n"
+                },
+                {
+                    "date": 1725269770956,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n     return NextResponse.json({ error: \"No token provided\" }, { status: 401 });\n   }\n \n   try {\n-    await runMiddleware(req, NextResponse.next(), cors);\n+    await runMiddleware(request, NextResponse.next(), cors);\n \n     const userData = verifyToken(authToken);\n     if (userData) {\n       return NextResponse.json({ user: userData });\n"
+                },
+                {
+                    "date": 1725269858130,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,16 +4,15 @@\n import cors, { runMiddleware } from \"@/app/middleware\";\n \n export async function GET(request: NextRequest) {\n   const authToken = cookies().get(\"auth_token\")?.value;\n+  await runMiddleware(request, NextResponse.next(), cors);\n \n   if (!authToken) {\n     return NextResponse.json({ error: \"No token provided\" }, { status: 401 });\n   }\n \n   try {\n-    await runMiddleware(request, NextResponse.next(), cors);\n-\n     const userData = verifyToken(authToken);\n     if (userData) {\n       return NextResponse.json({ user: userData });\n     } else {\n"
+                },
+                {
+                    "date": 1725269953594,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,8 @@\n import cors, { runMiddleware } from \"@/app/middleware\";\n \n export async function GET(request: NextRequest) {\n   const authToken = cookies().get(\"auth_token\")?.value;\n-  await runMiddleware(request, NextResponse.next(), cors);\n \n   if (!authToken) {\n     return NextResponse.json({ error: \"No token provided\" }, { status: 401 });\n   }\n"
+                },
+                {
+                    "date": 1725270561640,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,11 @@\n import { NextRequest, NextResponse } from \"next/server\";\n import { verifyToken } from \"@/app/lib/auth\";\n import { cookies } from \"next/headers\";\n-import cors, { runMiddleware } from \"@/app/middleware\";\n \n export async function GET(request: NextRequest) {\n+  await runMiddleware(request, NextResponse.next(), cors);\n+\n   const authToken = cookies().get(\"auth_token\")?.value;\n \n   if (!authToken) {\n     return NextResponse.json({ error: \"No token provided\" }, { status: 401 });\n"
+                },
+                {
+                    "date": 1725270574196,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n import { NextRequest, NextResponse } from \"next/server\";\n import { verifyToken } from \"@/app/lib/auth\";\n import { cookies } from \"next/headers\";\n+import cors, { runMiddleware } from \"@/app/middleware\";\n \n export async function GET(request: NextRequest) {\n   await runMiddleware(request, NextResponse.next(), cors);\n \n"
+                },
+                {
+                    "date": 1725272216992,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n import { cookies } from \"next/headers\";\n import cors, { runMiddleware } from \"@/app/middleware\";\n \n export async function GET(request: NextRequest) {\n-  await runMiddleware(request, NextResponse.next(), cors);\n+  await runMiddleware(request);\n \n   const authToken = cookies().get(\"auth_token\")?.value;\n \n   if (!authToken) {\n"
+                },
+                {
+                    "date": 1725272396272,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,14 @@\n import { NextRequest, NextResponse } from \"next/server\";\n import { verifyToken } from \"@/app/lib/auth\";\n import { cookies } from \"next/headers\";\n-import cors, { runMiddleware } from \"@/app/middleware\";\n+import { corsMiddleware } from \"@/app/middleware\";\n \n export async function GET(request: NextRequest) {\n-  await runMiddleware(request);\n-\n+  const corsResponse = corsMiddleware(request);\n+  if (corsResponse.status !== 200) {\n+    return corsResponse;\n+  }\n   const authToken = cookies().get(\"auth_token\")?.value;\n \n   if (!authToken) {\n     return NextResponse.json({ error: \"No token provided\" }, { status: 401 });\n"
                 }
             ],
             "date": 1724847503260,

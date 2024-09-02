@@ -86,7 +86,7 @@ import { useRouter } from "next/navigation";
 import { TelegramUser } from "@/types";
 
 export default function Login() {
-  const { login, user } = useAuth();
+  const { login } = useAuth();
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
 
@@ -120,7 +120,7 @@ export default function Login() {
             return response.json();
           })
           .then((data) => {
-            if (data.success && data.user && !user) {
+            if (data.success && data.user) {
               console.log("Login successful, user data:", data.user);
               login(data.user);
               // history.pushState({}, "", "/");

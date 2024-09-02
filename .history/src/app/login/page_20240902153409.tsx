@@ -90,13 +90,13 @@ export default function Login() {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
 
-  //   useEffect(() => {
-  //     console.log("Login component mounted, user:", user);
-  //     if (user) {
-  //       console.log("User already logged in, redirecting to home");
-  //       router.push("/");
-  //     }
-  //   }, [user, router]);
+  useEffect(() => {
+    console.log("Login component mounted, user:", user);
+    if (user) {
+      console.log("User already logged in, redirecting to home");
+      router.push("/");
+    }
+  }, [user, router]);
   useEffect(() => {
     if (window.Telegram?.WebApp) {
       const webApp = window.Telegram.WebApp;
@@ -120,11 +120,11 @@ export default function Login() {
             return response.json();
           })
           .then((data) => {
-            if (data.success && data.user && !user) {
+            if (data.success && data.user) {
               console.log("Login successful, user data:", data.user);
               login(data.user);
-              // history.pushState({}, "", "/");
-              router.push("/");
+              window.location.href = "/";
+              //   router.push("/");
             } else {
               throw new Error("Authentication failed");
             }

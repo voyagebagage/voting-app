@@ -33,14 +33,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifyTelegramAuth, generateToken } from "@/app/lib/auth";
 import { cookies } from "next/headers";
-import { corsMiddleware } from "@/app/middleware";
+import cors, { runMiddleware } from "@/app/middleware";
 
 export async function POST(request: NextRequest) {
-  // Apply CORS middleware
-  const corsResponse = corsMiddleware(request);
-  if (corsResponse.status !== 200) {
-    return corsResponse;
-  }
   const { initData } = await request.json();
   console.log("Received initData:", initData);
 
@@ -65,7 +60,6 @@ export async function POST(request: NextRequest) {
         sameSite: "none",
         secure: process.env.NODE_ENV === "production",
       });
-      console.log("cookies set");
 
       return NextResponse.json({ success: true, user: userData });
     } else {

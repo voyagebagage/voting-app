@@ -1,13 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifyToken } from "@/app/lib/auth";
 import { cookies } from "next/headers";
-import { corsMiddleware } from "@/app/middleware";
+import cors, { runMiddleware } from "@/app/middleware";
 
 export async function GET(request: NextRequest) {
-  const corsResponse = corsMiddleware(request);
-  if (corsResponse.status !== 200) {
-    return corsResponse;
-  }
   const authToken = cookies().get("auth_token")?.value;
 
   if (!authToken) {
@@ -15,6 +11,8 @@ export async function GET(request: NextRequest) {
   }
 
   try {
+    await runMiddleware(req, NextResponse.next(), cors);
+
     const userData = verifyToken(authToken);
     if (userData) {
       return NextResponse.json({ user: userData });
