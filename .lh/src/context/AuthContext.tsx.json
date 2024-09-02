@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 13,
+            "activePatchIndex": 15,
             "patches": [
                 {
                     "date": 1725141505538,
@@ -60,6 +60,14 @@
                 {
                     "date": 1725174639010,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,22 +19,26 @@\n   useEffect(() => {\n     console.log(\"AuthProvider useEffect running\");\n     // Check if user is already authenticated\n     const checkAuth = async () => {\n-      try {\n-        const response = await fetch(\"/api/auth/verify\", {\n-          credentials: \"include\",\n-        });\n-        console.log(\"Verify response status:\", response.status);\n-        if (response.ok) {\n-          const data = await response.json();\n-          console.log(\"Verify response data:\", data);\n-          if (data.user) {\n-            setUser(data.user);\n+      const storedUser = localStorage.getItem(\"user\");\n+      if (storedUser) {\n+        setUser(JSON.parse(storedUser));\n+      } else {\n+        try {\n+          const response = await fetch(\"/api/auth/verify\", {\n+            credentials: \"include\", // This is important for sending cookies\n+          });\n+          if (response.ok) {\n+            const data = await response.json();\n+            if (data.user) {\n+              setUser(data.user);\n+              localStorage.setItem(\"user\", JSON.stringify(data.user));\n+            }\n           }\n+        } catch (error) {\n+          console.error(\"Error checking authentication:\", error);\n         }\n-      } catch (error) {\n-        console.error(\"Error checking authentication:\", error);\n       }\n     };\n \n     checkAuth();\n"
+                },
+                {
+                    "date": 1725263990600,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,25 +19,27 @@\n   useEffect(() => {\n     console.log(\"AuthProvider useEffect running\");\n     // Check if user is already authenticated\n     const checkAuth = async () => {\n-      const storedUser = localStorage.getItem(\"user\");\n-      if (storedUser) {\n-        setUser(JSON.parse(storedUser));\n-      } else {\n-        try {\n-          const response = await fetch(\"/api/auth/verify\", {\n-            credentials: \"include\", // This is important for sending cookies\n-          });\n-          if (response.ok) {\n-            const data = await response.json();\n-            if (data.user) {\n-              setUser(data.user);\n-              localStorage.setItem(\"user\", JSON.stringify(data.user));\n+      if (window) {\n+        const storedUser = localStorage.getItem(\"user\");\n+        if (storedUser) {\n+          setUser(JSON.parse(storedUser));\n+        } else {\n+          try {\n+            const response = await fetch(\"/api/auth/verify\", {\n+              credentials: \"include\", // This is important for sending cookies\n+            });\n+            if (response.ok) {\n+              const data = await response.json();\n+              if (data.user) {\n+                setUser(data.user);\n+                localStorage.setItem(\"user\", JSON.stringify(data.user));\n+              }\n             }\n+          } catch (error) {\n+            console.error(\"Error checking authentication:\", error);\n           }\n-        } catch (error) {\n-          console.error(\"Error checking authentication:\", error);\n         }\n       }\n     };\n \n"
+                },
+                {
+                    "date": 1725264019130,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -51,9 +51,9 @@\n   const login = (userData: TelegramUser) => {\n     console.log(\"User data: LOGIN\", userData);\n \n     setUser(userData);\n-    localStorage.setItem(\"user\", JSON.stringify(userData));\n+    if (window) localStorage.setItem(\"user\", JSON.stringify(userData));\n   };\n \n   const logout = async () => {\n     try {\n"
                 }
             ],
             "date": 1725141505538,

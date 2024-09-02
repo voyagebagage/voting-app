@@ -3,14 +3,13 @@
 import { useAuth } from "@/context/AuthContext";
 import Login from "./login/page";
 import { useEffect, useState } from "react";
-// import { localStorage } from "localStorage";
 
 export default function Home() {
   const { user } = useAuth();
   // const [loading, setLoading] = useState(true);
 
   console.log("User STATE HOME:", user);
-  if (window) localStorage.getItem("user");
+  localStorage.getItem("user");
   // useEffect(() => {
   //   if (user !== null) {
   //     setLoading(false);

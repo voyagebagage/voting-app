@@ -3,7 +3,7 @@
 import { useAuth } from "@/context/AuthContext";
 import Login from "./login/page";
 import { useEffect, useState } from "react";
-// import { localStorage } from "localStorage";
+import { localStorage } from "localStorage";
 
 export default function Home() {
   const { user } = useAuth();
