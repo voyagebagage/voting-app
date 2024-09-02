@@ -20,7 +20,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     console.log("AuthProvider useEffect running");
     // Check if user is already authenticated
     const checkAuth = async () => {
-      if (typeof window !== "undefined") {
+      if (window) {
         const storedUser = localStorage.getItem("user");
         if (storedUser) {
           setUser(JSON.parse(storedUser));

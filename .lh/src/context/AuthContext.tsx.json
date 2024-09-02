@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 15,
+            "activePatchIndex": 17,
             "patches": [
                 {
                     "date": 1725141505538,
@@ -68,6 +68,14 @@
                 {
                     "date": 1725264019130,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -51,9 +51,9 @@\n   const login = (userData: TelegramUser) => {\n     console.log(\"User data: LOGIN\", userData);\n \n     setUser(userData);\n-    localStorage.setItem(\"user\", JSON.stringify(userData));\n+    if (window) localStorage.setItem(\"user\", JSON.stringify(userData));\n   };\n \n   const logout = async () => {\n     try {\n"
+                },
+                {
+                    "date": 1725264264155,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -51,9 +51,10 @@\n   const login = (userData: TelegramUser) => {\n     console.log(\"User data: LOGIN\", userData);\n \n     setUser(userData);\n-    if (window) localStorage.setItem(\"user\", JSON.stringify(userData));\n+    if (typeof window !== \"undefined\")\n+      localStorage.setItem(\"user\", JSON.stringify(userData));\n   };\n \n   const logout = async () => {\n     try {\n"
+                },
+                {
+                    "date": 1725264274028,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n   useEffect(() => {\n     console.log(\"AuthProvider useEffect running\");\n     // Check if user is already authenticated\n     const checkAuth = async () => {\n-      if (window) {\n+      if (typeof window !== \"undefined\") {\n         const storedUser = localStorage.getItem(\"user\");\n         if (storedUser) {\n           setUser(JSON.parse(storedUser));\n         } else {\n"
                 }
             ],
             "date": 1725141505538,
