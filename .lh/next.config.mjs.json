@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 1,
+            "activePatchIndex": 3,
             "patches": [
                 {
                     "date": 1724845470857,
@@ -12,6 +12,14 @@
                 {
                     "date": 1724846438793,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,5 +5,5 @@\n     NEXT_PUBLIC_TELEGRAM_BOT_NAME: process.env.NEXT_PUBLIC_TELEGRAM_BOT_NAME,\n   },\n };\n \n-module.exports = nextConfig;\n+export default nextConfig;\n"
+                },
+                {
+                    "date": 1725519370053,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,4 +6,26 @@\n   },\n };\n \n export default nextConfig;\n+\n+const ContentSecurityPolicy = `\n+  default-src 'self' https://cdn.ngrok.com;\n+  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;\n+  font-src 'self' https://fonts.gstatic.com;\n+`\n+\n+module.exports = {\n+  async headers() {\n+    return [\n+      {\n+        source: '/(.*)',\n+        headers: [\n+          {\n+            key: 'Content-Security-Policy',\n+            value: ContentSecurityPolicy.replace(/\\s{2,}/g, ' ').trim()\n+          }\n+        ]\n+      }\n+    ]\n+  }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725519473374,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,31 +1,32 @@\n /** @type {import('next').NextConfig} */\n-const nextConfig = {\n-  reactStrictMode: true,\n-  env: {\n-    NEXT_PUBLIC_TELEGRAM_BOT_NAME: process.env.NEXT_PUBLIC_TELEGRAM_BOT_NAME,\n-  },\n-};\n \n-export default nextConfig;\n-\n const ContentSecurityPolicy = `\n   default-src 'self' https://cdn.ngrok.com;\n   style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;\n   font-src 'self' https://fonts.gstatic.com;\n-`;\n+  script-src 'self' 'unsafe-eval' 'unsafe-inline';\n+  connect-src 'self' https://*.ngrok.io;\n+  img-src 'self' data: https:;\n+`\n \n-module.exports = {\n+const nextConfig = {\n+  reactStrictMode: true,\n+  env: {\n+    NEXT_PUBLIC_TELEGRAM_BOT_NAME: process.env.NEXT_PUBLIC_TELEGRAM_BOT_NAME,\n+  },\n   async headers() {\n     return [\n       {\n-        source: \"/(.*)\",\n+        source: '/(.*)',\n         headers: [\n           {\n-            key: \"Content-Security-Policy\",\n-            value: ContentSecurityPolicy.replace(/\\s{2,}/g, \" \").trim(),\n-          },\n-        ],\n-      },\n-    ];\n-  },\n+            key: 'Content-Security-Policy',\n+            value: ContentSecurityPolicy.replace(/\\s{2,}/g, ' ').trim()\n+          }\n+        ]\n+      }\n+    ]\n+  }\n };\n+\n+export default nextConfig;\n\\ No newline at end of file\n"
                 }
             ],
             "date": 1724845470857,

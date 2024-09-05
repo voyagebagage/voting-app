@@ -1,0 +1,50 @@
+{
+    "sourceFile": "src/app/globals.css",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 8,
+            "patches": [
+                {
+                    "date": 1725289723786,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1725359496960,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n @tailwind base;\n @tailwind components;\n @tailwind utilities;\n \n-.tg-button {\n+/* .tg-button {\n   @apply py-2 px-4 rounded-full font-medium text-sm transition-colors duration-200;\n }\n \n .tg-button-primary {\n@@ -22,9 +22,9 @@\n   @apply mb-2 p-3 rounded-lg flex justify-between items-center transition-colors duration-200;\n }\n \n /* Dark mode styles */\n-.dark .tg-button-primary {\n+/* .dark .tg-button-primary {\n   @apply bg-blue-400 hover:bg-blue-500;\n }\n \n .dark .tg-input,\n@@ -33,5 +33,22 @@\n }\n \n .dark .tg-list-item {\n   @apply bg-gray-800;\n+}  */\n+:root {\n+  --tg-theme-bg-color: #ffffff;\n+  --tg-theme-text-color: #000000;\n+  --tg-theme-hint-color: #999999;\n+  --tg-theme-link-color: #2481cc;\n+  --tg-theme-button-color: #5288c1;\n+  --tg-theme-button-text-color: #ffffff;\n }\n+\n+.dark {\n+  --tg-theme-bg-color: #1c1c1e;\n+  --tg-theme-text-color: #ffffff;\n+  --tg-theme-hint-color: #7d7d7d;\n+  --tg-theme-link-color: #58a8ed;\n+  --tg-theme-button-color: #5288c1;\n+  --tg-theme-button-text-color: #ffffff;\n+}\n"
+                },
+                {
+                    "date": 1725359864721,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n @tailwind base;\n @tailwind components;\n @tailwind utilities;\n \n-/* .tg-button {\n+.tg-button {\n   @apply py-2 px-4 rounded-full font-medium text-sm transition-colors duration-200;\n }\n \n .tg-button-primary {\n@@ -22,9 +22,9 @@\n   @apply mb-2 p-3 rounded-lg flex justify-between items-center transition-colors duration-200;\n }\n \n /* Dark mode styles */\n-/* .dark .tg-button-primary {\n+.dark .tg-button-primary {\n   @apply bg-blue-400 hover:bg-blue-500;\n }\n \n .dark .tg-input,\n@@ -33,9 +33,9 @@\n }\n \n .dark .tg-list-item {\n   @apply bg-gray-800;\n-}  */\n+}\n :root {\n   --tg-theme-bg-color: #ffffff;\n   --tg-theme-text-color: #000000;\n   --tg-theme-hint-color: #999999;\n"
+                },
+                {
+                    "date": 1725359880547,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,9 +34,9 @@\n \n .dark .tg-list-item {\n   @apply bg-gray-800;\n }\n-:root {\n+/* :root {\n   --tg-theme-bg-color: #ffffff;\n   --tg-theme-text-color: #000000;\n   --tg-theme-hint-color: #999999;\n   --tg-theme-link-color: #2481cc;\n@@ -50,5 +50,5 @@\n   --tg-theme-hint-color: #7d7d7d;\n   --tg-theme-link-color: #58a8ed;\n   --tg-theme-button-color: #5288c1;\n   --tg-theme-button-text-color: #ffffff;\n-}\n+} */\n"
+                },
+                {
+                    "date": 1725360394371,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,9 +34,9 @@\n \n .dark .tg-list-item {\n   @apply bg-gray-800;\n }\n-/* :root {\n+:root {\n   --tg-theme-bg-color: #ffffff;\n   --tg-theme-text-color: #000000;\n   --tg-theme-hint-color: #999999;\n   --tg-theme-link-color: #2481cc;\n@@ -50,5 +50,5 @@\n   --tg-theme-hint-color: #7d7d7d;\n   --tg-theme-link-color: #58a8ed;\n   --tg-theme-button-color: #5288c1;\n   --tg-theme-button-text-color: #ffffff;\n-} */\n+}\n"
+                },
+                {
+                    "date": 1725516648052,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,9 +34,9 @@\n \n .dark .tg-list-item {\n   @apply bg-gray-800;\n }\n-:root {\n+/* :root {\n   --tg-theme-bg-color: #ffffff;\n   --tg-theme-text-color: #000000;\n   --tg-theme-hint-color: #999999;\n   --tg-theme-link-color: #2481cc;\n@@ -50,5 +50,5 @@\n   --tg-theme-hint-color: #7d7d7d;\n   --tg-theme-link-color: #58a8ed;\n   --tg-theme-button-color: #5288c1;\n   --tg-theme-button-text-color: #ffffff;\n-}\n+} */\n"
+                },
+                {
+                    "date": 1725516674877,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n @tailwind base;\n @tailwind components;\n @tailwind utilities;\n \n-.tg-button {\n+/* .tg-button {\n   @apply py-2 px-4 rounded-full font-medium text-sm transition-colors duration-200;\n }\n \n .tg-button-primary {\n@@ -33,10 +33,10 @@\n }\n \n .dark .tg-list-item {\n   @apply bg-gray-800;\n-}\n-/* :root {\n+} */\n+:root {\n   --tg-theme-bg-color: #ffffff;\n   --tg-theme-text-color: #000000;\n   --tg-theme-hint-color: #999999;\n   --tg-theme-link-color: #2481cc;\n@@ -50,5 +50,5 @@\n   --tg-theme-hint-color: #7d7d7d;\n   --tg-theme-link-color: #58a8ed;\n   --tg-theme-button-color: #5288c1;\n   --tg-theme-button-text-color: #ffffff;\n-} */\n+}\n"
+                },
+                {
+                    "date": 1725516684492,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n   @apply mb-2 p-3 rounded-lg flex justify-between items-center transition-colors duration-200;\n }\n \n /* Dark mode styles */\n-.dark .tg-button-primary {\n+/* .dark .tg-button-primary {\n   @apply bg-blue-400 hover:bg-blue-500;\n }\n \n .dark .tg-input,\n@@ -33,10 +33,10 @@\n }\n \n .dark .tg-list-item {\n   @apply bg-gray-800;\n-}\n-*/ :root {\n+} */\n+ :root {\n   --tg-theme-bg-color: #ffffff;\n   --tg-theme-text-color: #000000;\n   --tg-theme-hint-color: #999999;\n   --tg-theme-link-color: #2481cc;\n"
+                },
+                {
+                    "date": 1725518380981,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n @tailwind base;\n @tailwind components;\n @tailwind utilities;\n \n-/* .tg-button {\n+.tg-button {\n   @apply py-2 px-4 rounded-full font-medium text-sm transition-colors duration-200;\n }\n \n .tg-button-primary {\n@@ -22,9 +22,9 @@\n   @apply mb-2 p-3 rounded-lg flex justify-between items-center transition-colors duration-200;\n }\n \n /* Dark mode styles */\n-/* .dark .tg-button-primary {\n+.dark .tg-button-primary {\n   @apply bg-blue-400 hover:bg-blue-500;\n }\n \n .dark .tg-input,\n@@ -33,9 +33,9 @@\n }\n \n .dark .tg-list-item {\n   @apply bg-gray-800;\n-} */\n+}\n :root {\n   --tg-theme-bg-color: #ffffff;\n   --tg-theme-text-color: #000000;\n   --tg-theme-hint-color: #999999;\n"
+                }
+            ],
+            "date": 1725289723786,
+            "name": "Commit-0",
+            "content": "@tailwind base;\n@tailwind components;\n@tailwind utilities;\n\n.tg-button {\n  @apply py-2 px-4 rounded-full font-medium text-sm transition-colors duration-200;\n}\n\n.tg-button-primary {\n  @apply bg-blue-500 text-white hover:bg-blue-600;\n}\n\n.tg-input {\n  @apply p-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500;\n}\n\n.tg-select {\n  @apply p-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500;\n}\n\n.tg-list-item {\n  @apply mb-2 p-3 rounded-lg flex justify-between items-center transition-colors duration-200;\n}\n\n/* Dark mode styles */\n.dark .tg-button-primary {\n  @apply bg-blue-400 hover:bg-blue-500;\n}\n\n.dark .tg-input,\n.dark .tg-select {\n  @apply bg-gray-800 border-gray-700 text-white;\n}\n\n.dark .tg-list-item {\n  @apply bg-gray-800;\n}\n"
+        }
+    ]
+}

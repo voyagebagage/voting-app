@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 6,
+            "activePatchIndex": 7,
             "patches": [
                 {
                     "date": 1724758545459,
@@ -32,6 +32,10 @@
                 {
                     "date": 1724843293505,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import { NextRequest, NextResponse } from \"next/server\";\n import dbConnect from \"@/app/lib/mongodb\";\n-import Item from \"@/models/Item\";\n+import Item from \"@/models/Items\";\n \n export async function GET(request: NextRequest) {\n   const { searchParams } = new URL(request.url);\n   const category = searchParams.get(\"category\");\n"
+                },
+                {
+                    "date": 1725350924308,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,8 +17,11 @@\n   await dbConnect();\n \n   try {\n     const items = await Item.find({ category, type });\n+    if (items.length === 0) {\n+      return NextResponse.json({ message: \"No items found\" }, { status: 200 });\n+    }\n     return NextResponse.json(items);\n   } catch (error) {\n     console.error(\"Error fetching items:\", error);\n     return NextResponse.json(\n"
                 }
             ],
             "date": 1724758545459,

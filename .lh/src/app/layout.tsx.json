@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 50,
+            "activePatchIndex": 70,
             "patches": [
                 {
                     "date": 1724755771893,
@@ -208,6 +208,86 @@
                 {
                     "date": 1725165170538,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,14 +37,12 @@\n }) {\n   return (\n     <html lang=\"en\">\n       <head>\n-      \n-         <Script\n-           src=\"https://telegram.org/js/telegram-web-app.js\"\n-           strategy=\"beforeInteractive\"\n-         />\n-       </head>\n+        <Script\n+          src=\"https://telegram.org/js/telegram-web-app.js\"\n+          strategy=\"beforeInteractive\"\n+        />\n       </head>\n       <body>\n         <AuthProvider>\n           <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>\n"
+                },
+                {
+                    "date": 1725290874739,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,8 +24,9 @@\n //       </body>\n //     </html>\n //   );\n // }\n+import \"@/styles/telegram.css\";\n import { AuthProvider } from \"@/context/AuthContext\";\n import Head from \"next/head\";\n import Script from \"next/script\";\n import { Suspense } from \"react\";\n"
+                },
+                {
+                    "date": 1725291482482,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n //       </body>\n //     </html>\n //   );\n // }\n-import \"@/styles/telegram.css\";\n+// import \"@/styles/telegram.css\";\n import { AuthProvider } from \"@/context/AuthContext\";\n import Head from \"next/head\";\n import Script from \"next/script\";\n import { Suspense } from \"react\";\n"
+                },
+                {
+                    "date": 1725291639276,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n //       </body>\n //     </html>\n //   );\n // }\n-// import \"@/styles/telegram.css\";\n+import \"@/global.css\";\n import { AuthProvider } from \"@/context/AuthContext\";\n import Head from \"next/head\";\n import Script from \"next/script\";\n import { Suspense } from \"react\";\n"
+                },
+                {
+                    "date": 1725291657252,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n //       </body>\n //     </html>\n //   );\n // }\n-import \"@/global.css\";\n+import \"@/app/global.css\";\n import { AuthProvider } from \"@/context/AuthContext\";\n import Head from \"next/head\";\n import Script from \"next/script\";\n import { Suspense } from \"react\";\n"
+                },
+                {
+                    "date": 1725291670752,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n //       </body>\n //     </html>\n //   );\n // }\n-import \"@/app/global.css\";\n+// import \"@/app/global.css\";\n import { AuthProvider } from \"@/context/AuthContext\";\n import Head from \"next/head\";\n import Script from \"next/script\";\n import { Suspense } from \"react\";\n"
+                },
+                {
+                    "date": 1725308876661,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n //       </body>\n //     </html>\n //   );\n // }\n-// import \"@/app/global.css\";\n+import \"@/styles/global.css\";\n import { AuthProvider } from \"@/context/AuthContext\";\n import Head from \"next/head\";\n import Script from \"next/script\";\n import { Suspense } from \"react\";\n"
+                },
+                {
+                    "date": 1725308904350,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n //       </body>\n //     </html>\n //   );\n // }\n-import \"@/styles/global.css\";\n+import \"@/styles/globals.css\";\n import { AuthProvider } from \"@/context/AuthContext\";\n import Head from \"next/head\";\n import Script from \"next/script\";\n import { Suspense } from \"react\";\n"
+                },
+                {
+                    "date": 1725309838531,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,11 @@\n //       </body>\n //     </html>\n //   );\n // }\n-import \"@/styles/globals.css\";\n+// import \"@/styles/globals.css\";\n+import styles from \"./styles.module.css\";\n+\n import { AuthProvider } from \"@/context/AuthContext\";\n import Head from \"next/head\";\n import Script from \"next/script\";\n import { Suspense } from \"react\";\n"
+                },
+                {
+                    "date": 1725309866188,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n //     </html>\n //   );\n // }\n // import \"@/styles/globals.css\";\n-import styles from \"./styles.module.css\";\n+import \"./styles.module.css\";\n \n import { AuthProvider } from \"@/context/AuthContext\";\n import Head from \"next/head\";\n import Script from \"next/script\";\n"
+                },
+                {
+                    "date": 1725309957513,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,10 +24,9 @@\n //       </body>\n //     </html>\n //   );\n // }\n-// import \"@/styles/globals.css\";\n-import \"./styles.module.css\";\n+import \"../styles/globals.css\";\n \n import { AuthProvider } from \"@/context/AuthContext\";\n import Head from \"next/head\";\n import Script from \"next/script\";\n"
+                },
+                {
+                    "date": 1725309991658,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n //       </body>\n //     </html>\n //   );\n // }\n-import \"../styles/globals.css\";\n+import \"../gloabals.css\";\n \n import { AuthProvider } from \"@/context/AuthContext\";\n import Head from \"next/head\";\n import Script from \"next/script\";\n"
+                },
+                {
+                    "date": 1725310021363,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n //       </body>\n //     </html>\n //   );\n // }\n-import \"../gloabals.css\";\n+import \"../globals.css\";\n \n import { AuthProvider } from \"@/context/AuthContext\";\n import Head from \"next/head\";\n import Script from \"next/script\";\n"
+                },
+                {
+                    "date": 1725310064602,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n //       </body>\n //     </html>\n //   );\n // }\n-import \"../globals.css\";\n+import \"../app/global.css\";\n \n import { AuthProvider } from \"@/context/AuthContext\";\n import Head from \"next/head\";\n import Script from \"next/script\";\n"
+                },
+                {
+                    "date": 1725310101998,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n //       </body>\n //     </html>\n //   );\n // }\n-import \"../app/global.css\";\n+import \"../app/globals.css\";\n \n import { AuthProvider } from \"@/context/AuthContext\";\n import Head from \"next/head\";\n import Script from \"next/script\";\n"
+                },
+                {
+                    "date": 1725359782181,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n           src=\"https://telegram.org/js/telegram-web-app.js\"\n           strategy=\"beforeInteractive\"\n         />\n       </head>\n-      <body>\n+      <body suppressHydrationWarning={true}>\n         <AuthProvider>\n           <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>\n         </AuthProvider>\n       </body>\n"
+                },
+                {
+                    "date": 1725360085070,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,11 +44,15 @@\n           src=\"https://telegram.org/js/telegram-web-app.js\"\n           strategy=\"beforeInteractive\"\n         />\n       </head>\n-      <body suppressHydrationWarning={true}>\n+      <body>\n         <AuthProvider>\n-          <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>\n+          <Suspense\n+            fallback={<div>Loading...</div>}\n+            suppressHydrationWarning={true}>\n+            {children}\n+          </Suspense>\n         </AuthProvider>\n       </body>\n     </html>\n   );\n"
+                },
+                {
+                    "date": 1725360247539,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -47,10 +47,13 @@\n       </head>\n       <body>\n         <AuthProvider>\n           <Suspense\n-            fallback={<div>Loading...</div>}\n-            suppressHydrationWarning={true}>\n+            fallback={\n+              <div className=\"flex justify-center items-center h-screen spinner\">\n+                Loading...\n+              </div>\n+            }>\n             {children}\n           </Suspense>\n         </AuthProvider>\n       </body>\n"
+                },
+                {
+                    "date": 1725360263906,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -48,9 +48,9 @@\n       <body>\n         <AuthProvider>\n           <Suspense\n             fallback={\n-              <div className=\"flex justify-center items-center h-screen spinner\">\n+              <div className=\"flex justify-center items-center h-screen\">\n                 Loading...\n               </div>\n             }>\n             {children}\n"
+                },
+                {
+                    "date": 1725515978354,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -49,9 +49,9 @@\n         <AuthProvider>\n           <Suspense\n             fallback={\n               <div className=\"flex justify-center items-center h-screen\">\n-                Loading...\n+                Layout Loading...\n               </div>\n             }>\n             {children}\n           </Suspense>\n"
+                },
+                {
+                    "date": 1725519290033,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,11 @@\n //     </html>\n //   );\n // }\n import \"../app/globals.css\";\n+import { Inter } from 'next/font/google'\n \n+const inter = Inter({ subsets: ['latin'] })\n import { AuthProvider } from \"@/context/AuthContext\";\n import Head from \"next/head\";\n import Script from \"next/script\";\n import { Suspense } from \"react\";\n@@ -37,9 +39,9 @@\n }: {\n   children: React.ReactNode;\n }) {\n   return (\n-    <html lang=\"en\">\n+    <html lang=\"en\" className={inter.className}>\n       <head>\n         <Script\n           src=\"https://telegram.org/js/telegram-web-app.js\"\n           strategy=\"beforeInteractive\"\n"
                 }
             ],
             "date": 1724755771893,

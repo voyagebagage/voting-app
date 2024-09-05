@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 57,
+            "activePatchIndex": 59,
             "patches": [
                 {
                     "date": 1724756387464,
@@ -236,6 +236,14 @@
                 {
                     "date": 1725174820009,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -69,14 +69,14 @@\n   return jwt.sign({ userId }, JWT_SECRET, { expiresIn: \"1d\" });\n }\n \n // export function verifyToken(token: string): any {\n-try {\n-  return jwt.verify(token, JWT_SECRET);\n-} catch (error) {\n-  return null;\n-}\n+// try {\n+//   return jwt.verify(token, JWT_SECRET);\n+// } catch (error) {\n+//   return null;\n // }\n+// }\n export function verifyToken(token: string): TelegramUser | null {\n   try {\n     const decoded = jwt.verify(token, JWT_SECRET) as { userId: string };\n     // Here you should fetch the full user data based on the userId\n"
+                },
+                {
+                    "date": 1725517018822,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -83,8 +83,9 @@\n     // For now, we'll just return a mock user object\n     return {\n       id: parseInt(decoded.userId),\n       first_name: \"User\",\n+\n     };\n   } catch (error) {\n     console.error(\"Error verifying token:\", error);\n     return null;\n"
+                },
+                {
+                    "date": 1725517110018,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -78,10 +78,9 @@\n // }\n export function verifyToken(token: string): TelegramUser | null {\n   try {\n     const decoded = jwt.verify(token, JWT_SECRET) as { userId: string };\n-    // Here you should fetch the full user data based on the userId\n-    // For now, we'll just return a mock user object\n+   \n     return {\n       id: parseInt(decoded.userId),\n       first_name: \"User\",\n     };\n"
                 }
             ],
             "date": 1724756387464,

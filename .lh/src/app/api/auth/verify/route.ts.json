@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 13,
+            "activePatchIndex": 16,
             "patches": [
                 {
                     "date": 1724847503260,
@@ -60,6 +60,18 @@
                 {
                     "date": 1725272396272,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,14 @@\n import { NextRequest, NextResponse } from \"next/server\";\n import { verifyToken } from \"@/app/lib/auth\";\n import { cookies } from \"next/headers\";\n-import cors, { runMiddleware } from \"@/app/middleware\";\n+import { corsMiddleware } from \"@/app/middleware\";\n \n export async function GET(request: NextRequest) {\n-  await runMiddleware(request);\n-\n+  const corsResponse = corsMiddleware(request);\n+  if (corsResponse.status !== 200) {\n+    return corsResponse;\n+  }\n   const authToken = cookies().get(\"auth_token\")?.value;\n \n   if (!authToken) {\n     return NextResponse.json({ error: \"No token provided\" }, { status: 401 });\n"
+                },
+                {
+                    "date": 1725515940183,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,8 +8,9 @@\n   if (corsResponse.status !== 200) {\n     return corsResponse;\n   }\n   const authToken = cookies().get(\"auth_token\")?.value;\n+console.log(\"authToken\", authToken);\n \n   if (!authToken) {\n     return NextResponse.json({ error: \"No token provided\" }, { status: 401 });\n   }\n"
+                },
+                {
+                    "date": 1725516775284,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n   if (corsResponse.status !== 200) {\n     return corsResponse;\n   }\n   const authToken = cookies().get(\"auth_token\")?.value;\n-  console.log(\"authToken\", authToken);\n+  console.log(\"VERIFY authToken\", authToken);\n \n   if (!authToken) {\n     return NextResponse.json({ error: \"No token provided\" }, { status: 401 });\n   }\n"
+                },
+                {
+                    "date": 1725516780819,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n   if (corsResponse.status !== 200) {\n     return corsResponse;\n   }\n   const authToken = cookies().get(\"auth_token\")?.value;\n-  console.log(\"VERIFY authToken\", authToken);\n+  console.log([\"VERIFY authToken\", authToken]);\n \n   if (!authToken) {\n     return NextResponse.json({ error: \"No token provided\" }, { status: 401 });\n   }\n"
                 }
             ],
             "date": 1724847503260,
