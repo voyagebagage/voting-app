@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 70,
+            "activePatchIndex": 72,
             "patches": [
                 {
                     "date": 1724755771893,
@@ -288,6 +288,14 @@
                 {
                     "date": 1725519290033,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,11 @@\n //     </html>\n //   );\n // }\n import \"../app/globals.css\";\n+import { Inter } from 'next/font/google'\n \n+const inter = Inter({ subsets: ['latin'] })\n import { AuthProvider } from \"@/context/AuthContext\";\n import Head from \"next/head\";\n import Script from \"next/script\";\n import { Suspense } from \"react\";\n@@ -37,9 +39,9 @@\n }: {\n   children: React.ReactNode;\n }) {\n   return (\n-    <html lang=\"en\">\n+    <html lang=\"en\" className={inter.className}>\n       <head>\n         <Script\n           src=\"https://telegram.org/js/telegram-web-app.js\"\n           strategy=\"beforeInteractive\"\n"
+                },
+                {
+                    "date": 1725523408149,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n //     </html>\n //   );\n // }\n import \"../app/globals.css\";\n-import { Inter } from \"next/font/google\";\n+// import { Inter } from \"next/font/google\";\n \n const inter = Inter({ subsets: [\"latin\"] });\n import { AuthProvider } from \"@/context/AuthContext\";\n import Head from \"next/head\";\n@@ -39,9 +39,9 @@\n }: {\n   children: React.ReactNode;\n }) {\n   return (\n-    <html lang=\"en\" className={inter.className}>\n+    <html lang=\"en\" >\n       <head>\n         <Script\n           src=\"https://telegram.org/js/telegram-web-app.js\"\n           strategy=\"beforeInteractive\"\n"
+                },
+                {
+                    "date": 1725523414252,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,9 +27,9 @@\n // }\n import \"../app/globals.css\";\n // import { Inter } from \"next/font/google\";\n \n-const inter = Inter({ subsets: [\"latin\"] });\n+// const inter = Inter({ subsets: [\"latin\"] });\n import { AuthProvider } from \"@/context/AuthContext\";\n import Head from \"next/head\";\n import Script from \"next/script\";\n import { Suspense } from \"react\";\n"
                 }
             ],
             "date": 1724755771893,

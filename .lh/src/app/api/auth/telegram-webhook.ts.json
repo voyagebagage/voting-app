@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/app/api/auth/telegram-webhook.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1725522066179,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1725522066179,
+            "name": "Commit-0",
+            "content": "import { NextApiRequest, NextApiResponse } from 'next'\nimport TelegramBot from 'node-telegram-bot-api'\n\n// Initialize your bot\nconst bot = new TelegramBot(process.env.TELEGRAM_BOT_TOKEN as string)\n\nexport default async function handler(req: NextApiRequest, res: NextApiResponse) {\n  if (req.method === 'POST') {\n    const { body } = req\n\n    // Process the update received from Telegram\n    try {\n      await bot.processUpdate(body)\n      res.status(200).json({ message: 'OK' })\n    } catch (error) {\n      console.error('Error processing update:', error)\n      res.status(500).json({ error: 'Error processing update' })\n    }\n  } else {\n    res.status(405).json({ error: 'Method not allowed' })\n  }\n}\n\n// Define your bot commands and logic here\nbot.onText(/\\/start/, (msg) => {\n  const chatId = msg.chat.id\n  bot.sendMessage(chatId, 'Welcome to your NextJS Telegram Bot!')\n})\n\n// Disable Next.js body parsing\nexport const config = {\n  api: {\n    bodyParser: false,\n  },\n}"
+        }
+    ]
+}

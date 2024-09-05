@@ -26,6 +26,9 @@
 //   );
 // }
 import "../app/globals.css";
+// import { Inter } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"] });
 import { AuthProvider } from "@/context/AuthContext";
 import Head from "next/head";
 import Script from "next/script";
