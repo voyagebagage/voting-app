@@ -18,14 +18,6 @@ interface ThemeParams {
   button_color: string;
   button_text_color: string;
 }
-interface ThemeParams {
-  bg_color: string;
-  text_color: string;
-  hint_color: string;
-  link_color: string;
-  button_color: string;
-  button_text_color: string;
-}
 
 interface TelegramWebApp {
   initDataUnsafe: {
@@ -37,19 +29,10 @@ interface TelegramWebApp {
   initData: string;
   colorScheme: "light" | "dark";
   themeParams: ThemeParams;
-  colorScheme: "light" | "dark";
-  themeParams: ThemeParams;
   ready: () => void;
   onEvent: (eventType: string, callback: () => void) => void;
 }
 
-// declare global {
-//   interface Window {
-//     Telegram?: {
-//       WebApp?: TelegramWebApp;
-//     };
-//   }
-// }
 declare module "@twa-dev/sdk" {
   const WebApp: TelegramWebApp;
   export default WebApp;
