@@ -1,7 +1,5 @@
 // src/telegram.d.ts
 
-import { TelegramUser } from "./types";
-
 interface TelegramUser {
   id: number;
   first_name: string;
@@ -17,6 +15,7 @@ interface ThemeParams {
   link_color: string;
   button_color: string;
   button_text_color: string;
+  [key: string]: string;
 }
 
 interface TelegramWebApp {
@@ -25,13 +24,19 @@ interface TelegramWebApp {
     auth_date: string;
     hash: string;
     query_id?: string;
+    [key: string]: any; // Allow for additional properties
   };
   initData: string;
   colorScheme: "light" | "dark";
   themeParams: ThemeParams;
   ready: () => void;
-  onEvent: (eventType: string, callback: () => void) => void;
+  onEvent: (eventType: string, eventHandler: () => void) => void;
+  offEvent: (eventType: string, eventHandler: () => void) => void;
+  sendData: (data: string) => void;
+  expand: () => void;
+  close: () => void;
 }
+// onEvent: (eventType: string, callback: () => void) => void;
 
 declare module "@twa-dev/sdk" {
   const WebApp: TelegramWebApp;
