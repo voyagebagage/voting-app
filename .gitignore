@@ -37,4 +37,5 @@ next-env.d.ts
 
 #saved version
 /.lh
-src/.lh
+src/.lh.lh/
+.history/

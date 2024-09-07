@@ -37,8 +37,8 @@ interface TelegramWebApp {
   initData: string;
   colorScheme: "light" | "dark";
   themeParams: ThemeParams;
-  // colorScheme: "light" | "dark";
-  // themeParams: ThemeParams;
+  colorScheme: "light" | "dark";
+  themeParams: ThemeParams;
   ready: () => void;
   onEvent: (eventType: string, callback: () => void) => void;
 }
