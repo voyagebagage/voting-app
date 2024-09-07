@@ -43,13 +43,13 @@ interface TelegramWebApp {
   onEvent: (eventType: string, callback: () => void) => void;
 }
 
-declare global {
-  interface Window {
-    Telegram?: {
-      WebApp?: TelegramWebApp;
-    };
-  }
-}
+// declare global {
+//   interface Window {
+//     Telegram?: {
+//       WebApp?: TelegramWebApp;
+//     };
+//   }
+// }
 declare module "@twa-dev/sdk" {
   const WebApp: TelegramWebApp;
   export default WebApp;
