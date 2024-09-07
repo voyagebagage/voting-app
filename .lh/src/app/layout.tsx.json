@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 50,
+            "activePatchIndex": 54,
             "patches": [
                 {
                     "date": 1724755771893,
@@ -208,6 +208,22 @@
                 {
                     "date": 1725165170538,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,14 +37,12 @@\n }) {\n   return (\n     <html lang=\"en\">\n       <head>\n-      \n-         <Script\n-           src=\"https://telegram.org/js/telegram-web-app.js\"\n-           strategy=\"beforeInteractive\"\n-         />\n-       </head>\n+        <Script\n+          src=\"https://telegram.org/js/telegram-web-app.js\"\n+          strategy=\"beforeInteractive\"\n+        />\n       </head>\n       <body>\n         <AuthProvider>\n           <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>\n"
+                },
+                {
+                    "date": 1725685007328,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -36,14 +36,14 @@\n   children: React.ReactNode;\n }) {\n   return (\n     <html lang=\"en\">\n-      <head>\n+      {/* <head>\n         <Script\n           src=\"https://telegram.org/js/telegram-web-app.js\"\n           strategy=\"beforeInteractive\"\n         />\n-      </head>\n+      </head> */}\n       <body>\n         <AuthProvider>\n           <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>\n         </AuthProvider>\n"
+                },
+                {
+                    "date": 1725689510923,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,10 +25,8 @@\n //     </html>\n //   );\n // }\n import { AuthProvider } from \"@/context/AuthContext\";\n-import Head from \"next/head\";\n-import Script from \"next/script\";\n import { Suspense } from \"react\";\n \n export default function RootLayout({\n   children,\n@@ -36,14 +34,9 @@\n   children: React.ReactNode;\n }) {\n   return (\n     <html lang=\"en\">\n-      {/* <head>\n-        <Script\n-          src=\"https://telegram.org/js/telegram-web-app.js\"\n-          strategy=\"beforeInteractive\"\n-        />\n-      </head> */}\n+    \n       <body>\n         <AuthProvider>\n           <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>\n         </AuthProvider>\n"
+                },
+                {
+                    "date": 1725689528202,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,8 +25,9 @@\n //     </html>\n //   );\n // }\n import { AuthProvider } from \"@/context/AuthContext\";\n+import { ThemeProvider } from \"@/context/ThemeProvider\";\n import { Suspense } from \"react\";\n \n export default function RootLayout({\n   children,\n@@ -36,9 +37,12 @@\n   return (\n     <html lang=\"en\">\n       <body>\n         <AuthProvider>\n+          <ThemeProvider>\n+\n           <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>\n+          </ThemeProvider>\n         </AuthProvider>\n       </body>\n     </html>\n   );\n"
+                },
+                {
+                    "date": 1725690233295,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n //     </html>\n //   );\n // }\n import { AuthProvider } from \"@/context/AuthContext\";\n-import { ThemeProvider } from \"@/context/ThemeProvider\";\n+import { ThemeProvider } from \"@/context/ThemeContext\";\n import { Suspense } from \"react\";\n \n export default function RootLayout({\n   children,\n"
                 }
             ],
             "date": 1724755771893,

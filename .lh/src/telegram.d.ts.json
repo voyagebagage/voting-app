@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 10,
+            "activePatchIndex": 18,
             "patches": [
                 {
                     "date": 1725102084696,
@@ -48,6 +48,38 @@
                 {
                     "date": 1725141148051,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,17 +4,17 @@\n \n interface TelegramUser {\n   id: number;\n   first_name: string;\n-  last_name: string;\n-  username: string;\n+  last_name?: string;\n+  username?: string;\n   language_code?: string;\n   allows_write_to_pm?: boolean;\n }\n \n interface TelegramWebApp {\n   initDataUnsafe: {\n-    user: TelegramUser;\n+    user?: TelegramUser;\n     auth_date: string;\n     hash: string;\n     query_id?: string;\n   };\n"
+                },
+                {
+                    "date": 1725524594273,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,8 +9,16 @@\n   username?: string;\n   language_code?: string;\n   allows_write_to_pm?: boolean;\n }\n+interface ThemeParams {\n+  bg_color: string;\n+  text_color: string;\n+  hint_color: string;\n+  link_color: string;\n+  button_color: string;\n+  button_text_color: string;\n+}\n \n interface TelegramWebApp {\n   initDataUnsafe: {\n     user?: TelegramUser;\n"
+                },
+                {
+                    "date": 1725524627005,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,8 +26,10 @@\n     hash: string;\n     query_id?: string;\n   };\n   initData: string;\n+  colorScheme: \"light\" | \"dark\";\n+  themeParams: ThemeParams;\n   ready: () => void;\n   // onEvent: (eventType: string) => void;\n }\n \n"
+                },
+                {
+                    "date": 1725524740148,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n   initData: string;\n   colorScheme: \"light\" | \"dark\";\n   themeParams: ThemeParams;\n   ready: () => void;\n-  // onEvent: (eventType: string) => void;\n+  onEvent: (eventType: string, callback: () => void) => void;\n }\n \n declare global {\n   interface Window {\n"
+                },
+                {
+                    "date": 1725558733070,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,10 +26,8 @@\n     hash: string;\n     query_id?: string;\n   };\n   initData: string;\n-  colorScheme: \"light\" | \"dark\";\n-  themeParams: ThemeParams;\n   ready: () => void;\n   onEvent: (eventType: string, callback: () => void) => void;\n }\n \n"
+                },
+                {
+                    "date": 1725558792367,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n   initDataUnsafe: {\n     user?: TelegramUser;\n     auth_date: string;\n     hash: string;\n-    query_id?: string;\n+    // query_id?: string;\n   };\n   initData: string;\n   ready: () => void;\n   onEvent: (eventType: string, callback: () => void) => void;\n"
+                },
+                {
+                    "date": 1725558821113,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,11 +23,13 @@\n   initDataUnsafe: {\n     user?: TelegramUser;\n     auth_date: string;\n     hash: string;\n-    // query_id?: string;\n+    query_id?: string;\n   };\n   initData: string;\n+  // colorScheme: \"light\" | \"dark\";\n+  // themeParams: ThemeParams;\n   ready: () => void;\n   onEvent: (eventType: string, callback: () => void) => void;\n }\n \n"
+                },
+                {
+                    "date": 1725558915486,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,4 +39,10 @@\n       WebApp?: TelegramWebApp;\n     };\n   }\n }\n+declare module '@twa-dev/sdk' {\n+\n+  const WebApp: TelegramWebApp;\n+\n+  export default WebApp;\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725558921142,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,7 +41,6 @@\n   }\n }\n declare module \"@twa-dev/sdk\" {\n   const WebApp: TelegramWebApp;\n-\n   export default WebApp;\n }\n"
                 }
             ],
             "date": 1725102084696,

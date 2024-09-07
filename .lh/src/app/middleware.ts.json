@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 4,
+            "activePatchIndex": 8,
             "patches": [
                 {
                     "date": 1725269623434,
@@ -24,6 +24,22 @@
                 {
                     "date": 1725272332162,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,26 +12,33 @@\n // export const config = {\n //   matcher: [\"/((?!api|_next/static|_next/image|favicon.ico).*)\"],\n // };\n \n-import Cors from \"cors\";\n import { NextRequest, NextResponse } from \"next/server\";\n \n-const cors = Cors({\n-  methods: [\"GET\", \"HEAD\", \"POST\"],\n-  origin: [process.env.NEXT_PUBLIC_APP_URL as string, \"http://localhost:3000\"],\n-  credentials: true,\n-});\n+const allowedOrigins = [\n+  process.env.NEXT_PUBLIC_NGROK_URL || \"\",\n+  \"http://localhost:3000\",\n+];\n \n-export function runMiddleware(req: NextRequest) {\n-  return new Promise((resolve, reject) => {\n-    const res = new NextResponse();\n-    cors(req as any, res as any, (result: any) => {\n-      if (result instanceof Error) {\n-        return reject(result);\n-      }\n-      return resolve(res);\n-    });\n-  });\n+export function corsMiddleware(request: NextRequest) {\n+  const origin = request.headers.get(\"origin\") || \"\";\n+  const isAllowedOrigin = allowedOrigins.includes(origin);\n+\n+  const response = NextResponse.next();\n+\n+  if (isAllowedOrigin) {\n+    response.headers.set(\"Access-Control-Allow-Origin\", origin);\n+  }\n+\n+  response.headers.set(\n+    \"Access-Control-Allow-Methods\",\n+    \"GET, POST, PUT, DELETE, OPTIONS\"\n+  );\n+  response.headers.set(\n+    \"Access-Control-Allow-Headers\",\n+    \"Content-Type, Authorization\"\n+  );\n+  response.headers.set(\"Access-Control-Allow-Credentials\", \"true\");\n+\n+  return response;\n }\n-\n-export default cors;\n"
+                },
+                {
+                    "date": 1725685665024,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n \n import { NextRequest, NextResponse } from \"next/server\";\n \n const allowedOrigins = [\n-  process.env.NEXT_PUBLIC_NGROK_URL || \"\",\n+  process.env.NEXT_PUBLIC_APP_URL || \"\",\n   \"http://localhost:3000\",\n ];\n \n export function corsMiddleware(request: NextRequest) {\n"
+                },
+                {
+                    "date": 1725685743250,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,8 +24,9 @@\n   const origin = request.headers.get(\"origin\") || \"\";\n   const isAllowedOrigin = allowedOrigins.includes(origin);\n \n   const response = NextResponse.next();\n+console.log(\"corsMiddleware\", response);\n \n   if (isAllowedOrigin) {\n     response.headers.set(\"Access-Control-Allow-Origin\", origin);\n   }\n"
+                },
+                {
+                    "date": 1725685831072,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,14 +24,13 @@\n   const origin = request.headers.get(\"origin\") || \"\";\n   const isAllowedOrigin = allowedOrigins.includes(origin);\n \n   const response = NextResponse.next();\n-  console.log(\"corsMiddleware\", response);\n-\n+  \n   if (isAllowedOrigin) {\n     response.headers.set(\"Access-Control-Allow-Origin\", origin);\n   }\n-\n+  \n   response.headers.set(\n     \"Access-Control-Allow-Methods\",\n     \"GET, POST, PUT, DELETE, OPTIONS\"\n   );\n@@ -39,7 +38,8 @@\n     \"Access-Control-Allow-Headers\",\n     \"Content-Type, Authorization\"\n   );\n   response.headers.set(\"Access-Control-Allow-Credentials\", \"true\");\n+  console.log(\"corsMiddleware\", response);\n \n   return response;\n }\n"
+                },
+                {
+                    "date": 1725685896482,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,8 +38,8 @@\n     \"Access-Control-Allow-Headers\",\n     \"Content-Type, Authorization\"\n   );\n   response.headers.set(\"Access-Control-Allow-Credentials\", \"true\");\n-  console.log(\"corsMiddleware\", response);\n+  // console.log(\"corsMiddleware\", response);\n \n   return response;\n }\n"
                 }
             ],
             "date": 1725269623434,

@@ -15,7 +15,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [user, setUser] = useState<TelegramUser | null>(null);
-
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   useEffect(() => {
     // Check if user is already authenticated
     const checkAuth = async () => {
@@ -27,6 +27,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
           const data = await response.json();
           if (data.user) {
             setUser(data.user);
+            setIsAuthenticated(true);
           }
         }
       } catch (error) {

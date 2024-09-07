@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 19,
+            "activePatchIndex": 29,
             "patches": [
                 {
                     "date": 1725141505538,
@@ -84,6 +84,46 @@
                 {
                     "date": 1725270136354,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,11 +35,9 @@\n     };\n \n     checkAuth();\n   }, []);\n-  useEffect(() => {\n-    console.log(\"User state updated:\", user);\n-  }, [user]);\n+\n   const login = (userData: TelegramUser) => {\n     console.log(\"User data: LOGIN\", userData);\n \n     setUser(userData);\n"
+                },
+                {
+                    "date": 1725557559456,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({\n   children,\n }) => {\n   const [user, setUser] = useState<TelegramUser | null>(null);\n-\n+const [isAuthenticated, setIsAuthenticated] = useState(false);\n   useEffect(() => {\n     // Check if user is already authenticated\n     const checkAuth = async () => {\n       try {\n"
+                },
+                {
+                    "date": 1725557566210,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,8 +26,9 @@\n         if (response.ok) {\n           const data = await response.json();\n           if (data.user) {\n             setUser(data.user);\n+            setIsAuthenticated(true);\n           }\n         }\n       } catch (error) {\n         console.error(\"Error checking authentication:\", error);\n"
+                },
+                {
+                    "date": 1725557714146,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -56,9 +56,9 @@\n     }\n   };\n \n   return (\n-    <AuthContext.Provider value={{ user, login, logout }}>\n+    <AuthContext.Provider value={{ user, login, logout,isAuthenticated }}>\n       {children}\n     </AuthContext.Provider>\n   );\n };\n"
+                },
+                {
+                    "date": 1725557730765,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,9 @@\n import { TelegramUser } from \"@/types\";\n \n interface AuthContextType {\n   user: TelegramUser | null;\n+  isAuthenticated: boolean;\n   login: (user: TelegramUser) => void;\n   logout: () => void;\n }\n \n"
+                },
+                {
+                    "date": 1725686028861,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,9 +39,9 @@\n     checkAuth();\n   }, []);\n \n   const login = (userData: TelegramUser) => {\n-    console.log(\"User data: LOGIN\", userData);\n+    console.log([\"User data: LOGIN\", userData]);\n \n     setUser(userData);\n   };\n \n"
+                },
+                {
+                    "date": 1725687279000,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,9 +27,9 @@\n         if (response.ok) {\n           const data = await response.json();\n           if (data.user) {\n             setUser(data.user);\n-            setIsAuthenticated(true);\n+            // setIsAuthenticated(true);\n           }\n         }\n       } catch (error) {\n         console.error(\"Error checking authentication:\", error);\n"
+                },
+                {
+                    "date": 1725687790915,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,9 +39,9 @@\n     checkAuth();\n   }, []);\n \n   const login = (userData: TelegramUser) => {\n-    console.log([\"User data: LOGIN\", userData]);\n+    console.log([\"User LOGIN\", userData]);\n \n     setUser(userData);\n   };\n \n"
+                },
+                {
+                    "date": 1725687893163,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,9 +27,9 @@\n         if (response.ok) {\n           const data = await response.json();\n           if (data.user) {\n             setUser(data.user);\n-            // setIsAuthenticated(true);\n+            setIsAuthenticated(true);\n           }\n         }\n       } catch (error) {\n         console.error(\"Error checking authentication:\", error);\n"
+                },
+                {
+                    "date": 1725688099300,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,9 +27,9 @@\n         if (response.ok) {\n           const data = await response.json();\n           if (data.user) {\n             setUser(data.user);\n-            setIsAuthenticated(true);\n+           \n           }\n         }\n       } catch (error) {\n         console.error(\"Error checking authentication:\", error);\n"
+                },
+                {
+                    "date": 1725688712819,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,8 +27,9 @@\n         if (response.ok) {\n           const data = await response.json();\n           if (data.user) {\n             setUser(data.user);\n+            setIsAuthenticated(true);\n           }\n         }\n       } catch (error) {\n         console.error(\"Error checking authentication:\", error);\n@@ -41,8 +42,9 @@\n   const login = (userData: TelegramUser) => {\n     console.log([\"User LOGIN\", userData]);\n \n     setUser(userData);\n+    setIsAuthenticated(true);\n   };\n \n   const logout = async () => {\n     try {\n"
                 }
             ],
             "date": 1725141505538,
