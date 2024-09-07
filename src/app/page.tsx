@@ -2,10 +2,11 @@
 
 import { useAuth } from "@/providers/AuthContext";
 import { useEffect, useState } from "react";
-import WebApp from "@twa-dev/sdk";
+// import WebApp from "@twa-dev/sdk";
 import Login from "./login/page";
 import { useTheme } from "@/providers/ThemeContext";
 import VotingApp from "@/components/VotingApp";
+import WebApp from "./lib/twa-sdk";
 
 export default function Home() {
   const { user, isAuthenticated } = useAuth();
@@ -15,8 +16,8 @@ export default function Home() {
 
   useEffect(() => {
     // console.log(["Home component mounted"]);
-    WebApp.ready();
-    console.log(["WebApp ready :" + WebApp.themeParams]);
+    WebApp?.ready();
+    console.log(["WebApp ready :" + WebApp?.themeParams]);
 
     setIsReady(true);
   }, []);

@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "@/providers/AuthContext";
 import { useRouter } from "next/navigation";
-import WebApp from "@twa-dev/sdk";
+import WebApp from "../lib/twa-sdk";
+// import WebApp from "@twa-dev/sdk";
 
 export default function Login() {
   const { login, user } = useAuth();
@@ -12,7 +13,7 @@ export default function Login() {
 
   useEffect(() => {
     // console.log(["Login component mounted"]);
-    const initData = WebApp.initData;
+    const initData = WebApp?.initData;
 
     // console.log(["Init Data:", initData]);
     if (initData) {

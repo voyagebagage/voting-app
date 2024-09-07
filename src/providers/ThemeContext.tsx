@@ -1,6 +1,7 @@
 // src/context/ThemeContext.tsx
 "use client";
 
+import WebApp from "@/app/lib/twa-sdk";
 import React, {
   createContext,
   useContext,
@@ -8,7 +9,7 @@ import React, {
   useState,
   useMemo,
 } from "react";
-import WebApp from "@twa-dev/sdk";
+// import WebApp from "@twa-dev/sdk";
 
 type Theme = {
   colorScheme: string;
@@ -52,16 +53,16 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
   useEffect(() => {
     const updateTheme = () => {
       setTheme({
-        colorScheme: WebApp.colorScheme,
-        ...WebApp.themeParams,
+        colorScheme: WebApp?.colorScheme || "",
+        ...WebApp?.themeParams,
       });
     };
 
     updateTheme();
-    WebApp.onEvent("themeChanged", updateTheme);
+    WebApp?.onEvent("themeChanged", updateTheme);
 
     return () => {
-      WebApp.offEvent("themeChanged", updateTheme);
+      WebApp?.offEvent("themeChanged", updateTheme);
     };
   }, []);
 
