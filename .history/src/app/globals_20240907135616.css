@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* .tg-button {
+  @apply py-2 px-4 rounded-full font-medium text-sm transition-colors duration-200;
+}
+
+.tg-button-primary {
+  @apply bg-blue-500 text-white hover:bg-blue-600;
+}
+
+.tg-input {
+  @apply p-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500;
+}
+
+.tg-select {
+  @apply p-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500;
+}
+
+.tg-list-item {
+  @apply mb-2 p-3 rounded-lg flex justify-between items-center transition-colors duration-200;
+} */
+
+/* Dark mode styles */
+/* .dark .tg-button-primary {
+  @apply bg-blue-400 hover:bg-blue-500;
+}
+
+.dark .tg-input,
+.dark .tg-select {
+  @apply bg-gray-800 border-gray-700 text-white;
+}
+
+.dark .tg-list-item {
+  @apply bg-gray-800;
+} */
+:root {
+  --tg-theme-bg-color: #ffffff;
+  --tg-theme-text-color: #000000;
+  --tg-theme-hint-color: #999999;
+  --tg-theme-link-color: #2481cc;
+  --tg-theme-button-color: #5288c1;
+  --tg-theme-button-text-color: #ffffff;
+}
+
+.dark {
+  --tg-theme-bg-color: #1c1c1e;
+  --tg-theme-text-color: #ffffff;
+  --tg-theme-hint-color: #7d7d7d;
+  --tg-theme-link-color: #58a8ed;
+  --tg-theme-button-color: #5288c1;
+  --tg-theme-button-text-color: #ffffff;
+}

@@ -4,12 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:tunnel": "ts-node scripts/dev-with-tunnel.ts",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "@types/node-telegram-bot-api": "^0.64.7",
+    "@twa-dev/sdk": "^7.8.0",
     "axios": "^1.7.6",
     "cors": "^2.8.5",
     "ioredis": "^5.4.1",
@@ -25,6 +26,7 @@
   "devDependencies": {
     "@types/cors": "^2.8.17",
     "@types/jsonwebtoken": "^9.0.6",
+    "@types/localtunnel": "^2.0.4",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
