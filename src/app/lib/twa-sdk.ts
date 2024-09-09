@@ -1,9 +1,12 @@
 // src/lib/twa-sdk.ts
 
-let WebApp: TelegramWebApp | null = null;
+import { TelegramWebApp } from "@/telegram";
 
-if (typeof window !== "undefined") {
-  WebApp = require("@twa-dev/sdk").default;
-}
+// let WebApp: TelegramWebApp = null;
 
+// if (typeof window !== "undefined") {
+//   WebApp = require("@twa-dev/sdk").default;
+// }
+const WebApp: TelegramWebApp =
+  typeof window !== "undefined" ? require("@twa-dev/sdk").default : null;
 export default WebApp;

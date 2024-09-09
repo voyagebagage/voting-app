@@ -1,3 +1,4 @@
+import "./globals.css";
 import { AppProviders } from "@/providers";
 
 export default function RootLayout({
@@ -8,7 +9,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <AppProviders>{children}</AppProviders>
+        <main className="bg-blue-900">
+          <AppProviders>{children}</AppProviders>
+        </main>
       </body>
     </html>
   );

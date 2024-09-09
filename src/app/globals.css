@@ -20,10 +20,10 @@
 
 .tg-list-item {
   @apply mb-2 p-3 rounded-lg flex justify-between items-center transition-colors duration-200;
-} */
+}
 
-/* Dark mode styles */
-/* .dark .tg-button-primary {
+
+.dark .tg-button-primary {
   @apply bg-blue-400 hover:bg-blue-500;
 }
 
@@ -35,7 +35,7 @@
 .dark .tg-list-item {
   @apply bg-gray-800;
 } */
-:root {
+/* :root {
   --tg-theme-bg-color: #ffffff;
   --tg-theme-text-color: #000000;
   --tg-theme-hint-color: #999999;
@@ -44,11 +44,11 @@
   --tg-theme-button-text-color: #ffffff;
 }
 
-[data-theme="dark"] {
+.dark {
   --tg-theme-bg-color: #1c1c1e;
   --tg-theme-text-color: #ffffff;
   --tg-theme-hint-color: #7d7d7d;
   --tg-theme-link-color: #58a8ed;
   --tg-theme-button-color: #5288c1;
   --tg-theme-button-text-color: #ffffff;
-}
+} */

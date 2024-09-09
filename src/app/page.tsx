@@ -2,11 +2,12 @@
 
 import { useAuth } from "@/providers/AuthContext";
 import { useEffect, useState } from "react";
-// import WebApp from "@twa-dev/sdk";
 import Login from "./login/page";
 import { useTheme } from "@/providers/ThemeContext";
 import VotingApp from "@/components/VotingApp";
 import WebApp from "./lib/twa-sdk";
+import StartupPopup from "@/components/StartupPopUp";
+import CenteredSpinner from "@/components/ui/CenteredSpinner";
 
 export default function Home() {
   const { user, isAuthenticated } = useAuth();
@@ -17,36 +18,27 @@ export default function Home() {
   useEffect(() => {
     // console.log(["Home component mounted"]);
     WebApp?.ready();
-    console.log(["WebApp ready :" + WebApp?.themeParams]);
-
     setIsReady(true);
   }, []);
 
-  console.log(["User STATE HOME:", user, bgClass, textClass]);
+  console.log(["theme light or dark", theme?.colorScheme]);
 
   if (!isReady) {
-    if (!user) {
-      return (
-        <div className="text-tg-theme-text-color">
-          <Login />
-        </div>
-      );
-    }
-    if (!isAuthenticated) {
-      return (
-        <main className={`min-h-screen p-4 ${bgClass} ${textClass}`}>
-          <div className="flex justify-center items-center h-screen">
-            auth Page Loading...
-          </div>
-        </main>
-      );
-    }
+    if (!user) return <Login />;
+    if (!isAuthenticated) return <CenteredSpinner />;
   }
   return (
-    <main className={`min-h-screen p-4 ${bgClass} ${textClass} ${theme}`}>
+    <div
+      className={`min-h-screen p-4  ${
+        theme.colorScheme === "dark"
+          ? "bg-gray-900 text-white"
+          : "bg-white text-black"
+      }`}>
       <header>Welcome, {user?.first_name}!</header>
-      <div className="max-w-md mx-auto"></div>
-      <VotingApp />
-    </main>
+      <div className="max-w-md mx-auto">
+        <StartupPopup />
+        <VotingApp />
+      </div>
+    </div>
   );
 }

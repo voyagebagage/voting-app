@@ -1,5 +1,7 @@
 // src/telegram.d.ts
 
+import { off } from "process";
+
 interface TelegramUser {
   id: number;
   first_name: string;
@@ -29,13 +31,38 @@ interface TelegramWebApp {
   initData: string;
   colorScheme: "light" | "dark";
   themeParams: ThemeParams;
+  isVersionAtLeast: (version: string) => boolean;
+  showPopup: (params: {
+    title: string;
+    message: string;
+    buttons: {
+      text: string;
+      type?: "alert" | "confirm";
+      // onClick: () => void;
+    }[];
+  }) => void;
   ready: () => void;
   onEvent: (eventType: string, eventHandler: () => void) => void;
   offEvent: (eventType: string, eventHandler: () => void) => void;
   sendData: (data: string) => void;
   expand: () => void;
   close: () => void;
+  MainButton: {
+    update: (params: { text: string; onClick: () => void }) => void;
+    show: () => void;
+    onClick: (params: () => void) => void;
+    hide: () => void;
+    offClick: (params: () => void) => void;
+    setText: (params: string) => void;
+  };
+  SidebarButton: {
+    update: (params: { text: string; onClick: () => void }) => void;
+    show: () => void;
+    onClick: () => void;
+    hide: () => void;
+  };
 }
+
 // onEvent: (eventType: string, callback: () => void) => void;
 
 declare module "@twa-dev/sdk" {

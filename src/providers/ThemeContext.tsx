@@ -9,7 +9,6 @@ import React, {
   useState,
   useMemo,
 } from "react";
-// import WebApp from "@twa-dev/sdk";
 
 type Theme = {
   colorScheme: string;
@@ -17,14 +16,20 @@ type Theme = {
 };
 
 type ThemeContextType = {
-  theme: Theme | null;
+  theme: Theme;
   bgClass: string;
   textClass: string;
   buttonBgClass: string;
   buttonTextClass: string;
 };
 
-const ThemeContext = createContext<ThemeContextType | null>(null);
+const ThemeContext = createContext<ThemeContextType>({
+  theme: { colorScheme: "dark" },
+  bgClass: "",
+  textClass: "",
+  buttonBgClass: "",
+  buttonTextClass: "",
+});
 
 export const useTheme = () => {
   const context = useContext(ThemeContext);
@@ -48,21 +53,21 @@ const getColorClass = (color: string | undefined, prefix: string): string => {
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [theme, setTheme] = useState<Theme | null>(null);
+  const [theme, setTheme] = useState<Theme>({ colorScheme: "dark" });
 
   useEffect(() => {
     const updateTheme = () => {
       setTheme({
-        colorScheme: WebApp?.colorScheme || "",
-        ...WebApp?.themeParams,
+        colorScheme: WebApp.colorScheme,
+        ...WebApp.themeParams,
       });
     };
 
     updateTheme();
-    WebApp?.onEvent("themeChanged", updateTheme);
+    WebApp.onEvent("themeChanged", updateTheme);
 
     return () => {
-      WebApp?.offEvent("themeChanged", updateTheme);
+      WebApp.offEvent("themeChanged", updateTheme);
     };
   }, []);
 
@@ -91,7 +96,8 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
   );
 
   if (!theme) return null;
-  console.log(["THEME CONTEXT:", contextValue, themeClasses, theme]);
+  // console.table(Object.entries(themeClasses));
+  // console.table(Object.entries(theme));
 
   return (
     <ThemeContext.Provider value={contextValue}>

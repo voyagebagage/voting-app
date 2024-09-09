@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "@/providers/AuthContext";
 import { useRouter } from "next/navigation";
 import WebApp from "../lib/twa-sdk";
+import CenteredSpinner from "@/components/ui/CenteredSpinner";
 // import WebApp from "@twa-dev/sdk";
 
 export default function Login() {
@@ -60,6 +61,6 @@ export default function Login() {
   if (error) {
     return <div>{error}</div>;
   }
-
-  return <div>Authenticating with Telegram...</div>;
+  //create a light blue spinner and center the div
+  return <CenteredSpinner />;
 }
